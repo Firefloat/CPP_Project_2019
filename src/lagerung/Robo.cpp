@@ -3,3 +3,8 @@
 //
 
 #include "Robo.h"
+
+Container Robo::GetContainer() {}
+
+void Robo::SetContainer(int prio, Container container) {
+}

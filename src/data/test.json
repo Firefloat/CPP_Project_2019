@@ -1,0 +1,30 @@
+{
+    "shelf":{
+        "amount": 16,
+        "width": 160,
+        "depth": 0.8,
+        "height_total": 24,
+        "height_board": 0.75,
+        "gap": 2
+    },
+    "container": {
+        "height": 0.6,
+        "depth": 0.6,
+        "width_c1": 0.6,
+        "width_c2": 0.9,
+        "width_c3": 1.2,
+        "gap": 0.15
+    },
+    "robo":{
+        "vertical_acceleration": 0.6,
+        "vertical_velocity": 1.2,
+        "horizontal_acceleration": 1.6,
+        "horizontal_velocity": 3.2,
+        "time_store_restore": 5
+    },
+    "conveyor_belt":{
+        "velocity": 2,
+        "length_queue": 6,
+        "length_to_first_shelf": 5
+    }
+}

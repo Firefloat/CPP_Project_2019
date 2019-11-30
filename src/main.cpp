@@ -1,6 +1,11 @@
 #include <iostream>
+#include "extern/json.hpp"
+#include <fstream>
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    using json = nlohmann::json;
+    std::ifstream myfile{"../data/setup.json"};
+    json j = json::parse(myfile);
+    std::cout << j["container"]["depth"] << std::endl;
     return 0;
 }

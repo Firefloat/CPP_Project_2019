@@ -28,7 +28,7 @@ public:
             maxHorizontalVel_(max_horizontal_vel), maxVerticalVel_(max_veritcal_vel), horizontalVel_(horizontalVel),
             verticalVel_(verticalVel), timeForDeploy_(timeForDeploy) { }
 
-    Container GetContainer(int prio);
+    Container GetContainer();
     void SetContainer(int prio, Container container);
 };
 
