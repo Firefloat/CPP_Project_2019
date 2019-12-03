@@ -1,0 +1,23 @@
+#ifndef SRC_STORAGEMANAGER_H
+#define SRC_STORAGEMANAGER_H
+
+#include <queue>
+#include "ArticleType.h"
+#include "Article.h"
+#include "Container.h"
+
+class StorageManager {
+
+private:
+
+public:
+    // dict / list Article -> quantity is stored in Article
+    std::queue<Container> toStore;
+
+    void AddToQueue(Container container);
+    void RemoveFromStorage(ArticleType articleType, int amount);
+
+};
+
+
+#endif //SRC_STORAGEMANAGER_H
