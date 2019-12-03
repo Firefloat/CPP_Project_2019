@@ -26,5 +26,6 @@
         "height_board": 0.75,
         "height_total": 24,
         "width": 160
-    }
+    },
+    "speed_multiplier": 1.0
 }

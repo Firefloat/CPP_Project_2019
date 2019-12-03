@@ -12,17 +12,17 @@
 class Loaderton {
     using json = nlohmann::json;
 private:
-    const int8_t intentSize = 4;
-    std::string setupFileName;
-    std::string saveFileName;
-    json jsonData;
-    Loaderton() : setupFileName("../data/setup.json"), saveFileName("../data/save.json") {};
+    const int8_t intentSize_ = 4;
+    std::string setupFileName_;
+    std::string saveFileName_;
+    json jsonData_;
+    Loaderton() : setupFileName_("../data/setup.json"), saveFileName_("../data/save.json") {};
 
 public:
     void Setup();
     void Save();
     void Load();
-    json getJsonData() { return jsonData; }
+    json getJsonData() { return jsonData_; }
 
     // delete copy constructor and assignment operator
     Loaderton(Loaderton &) = delete;

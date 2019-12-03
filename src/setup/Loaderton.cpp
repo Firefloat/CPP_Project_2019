@@ -6,17 +6,17 @@
 #include <iostream>
 
 void Loaderton::Load() {
-    std::ifstream tempFile{saveFileName};
+    std::ifstream tempFile{saveFileName_};
     // TODO
 }
 
 void Loaderton::Save() {
     // TODO
-    std::ofstream tempFile(saveFileName);
-    tempFile << jsonData.dump(intentSize);
+    std::ofstream tempFile(saveFileName_);
+    tempFile << jsonData_.dump(intentSize_);
 }
 
 void Loaderton::Setup() {
-    std::ifstream tempFile{setupFileName};
-    jsonData = json::parse(tempFile);
+    std::ifstream tempFile{setupFileName_};
+    jsonData_ = json::parse(tempFile);
 }

@@ -26,5 +26,6 @@
         "velocity": 2,
         "length_queue": 6,
         "length_to_first_shelf": 5
-    }
+    },
+    "speed_multiplier" : 1.0
 }
