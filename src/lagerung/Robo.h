@@ -18,7 +18,7 @@ public:
     Shelf rightShelf_;
     // TODO: Actionqueue
 
-    //Robo() {};    // TODO
+    Robo(Coordinates coordinates);
 
 
 };

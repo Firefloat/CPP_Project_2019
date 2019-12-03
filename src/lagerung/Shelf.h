@@ -2,6 +2,7 @@
 #define SRC_SHELF_H
 
 #include <vector>
+#include "../setup/Loaderton.h"
 #include "Size.h"
 #include "Board.h"
 
@@ -11,11 +12,10 @@ private:
 
 public:
     Size size_;
+    double boardHeight_;
     std::vector<Board> boards_;
 
-    Shelf(Size size) : size_(size) {
-        //boards_(/*TODO: Count*/, Board(Size, Coordinates));
-    };
+    Shelf();
 
     void Store(Container container);
     Container Remove(Coordinates coordinates);

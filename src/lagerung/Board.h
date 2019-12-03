@@ -2,6 +2,7 @@
 #define SRC_BOARD_H
 
 #include <vector>
+#include "../setup/Loaderton.h"
 #include "Size.h"
 #include "Coordinates.h"
 #include "FreeSpace.h"
@@ -16,9 +17,7 @@ public:
     Coordinates coordinates_;
     std::vector<Container> storedContainers_;
 
-    Board(Size size, Coordinates coordinates) : size_(size), coordinates_(coordinates) {
-        storedContainers_.reserve(/*TODO: Calculate*/1);
-    };
+    Board(Size size, Coordinates coordinates);
 
     std::vector<FreeSpace> GetFreeSpace();
     void Store(Container container);
