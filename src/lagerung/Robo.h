@@ -20,7 +20,6 @@ public:
 
     Robo(Coordinates coordinates);
 
-
 };
 
 
