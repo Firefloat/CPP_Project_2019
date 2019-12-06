@@ -19,7 +19,7 @@ public:
 
     Board(Size size, Coordinates coordinates);
 
-    std::vector<FreeSpace> GetFreeSpace();
+    std::vector<FreeSpace> GetFreeSpace(const Container& container);
     void Store(Container container);
     Container Remove(Coordinates coordinates);
 };
