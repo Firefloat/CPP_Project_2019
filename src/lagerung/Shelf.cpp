@@ -17,6 +17,7 @@ Shelf::Shelf() {
 }
 
 std::vector<std::vector<FreeSpace>> Shelf::GetFreeSpace(const Container& container){
+    // TODO get best space with priority
     auto resultVector = std::vector<std::vector<FreeSpace>>{};
     for (auto board : boards_){
         resultVector.push_back(board.GetFreeSpace(container));

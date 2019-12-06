@@ -22,6 +22,7 @@ void StorageManager::RemoveFromStorage(ArticleType articleType, int amount) {
 
 Coordinates StorageManager::FindOptimalSpace(const Container& container) {
 
+    // TODO multithreaded search
     auto getFreeSpaceFromShelfs = [&](Shelf shelf) { return shelf.GetFreeSpace(container); };
     auto freeSpace = std::vector<std::vector<std::vector<FreeSpace>>>{};
 
@@ -29,7 +30,4 @@ Coordinates StorageManager::FindOptimalSpace(const Container& container) {
         freeSpace.push_back(getFreeSpaceFromShelfs(robo.leftShelf_));
         freeSpace.push_back(getFreeSpaceFromShelfs(robo.rightShelf_));
     }
-
-
-    // TODO
 }
