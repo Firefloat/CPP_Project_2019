@@ -5,6 +5,7 @@
 #include "Size.h"
 #include "Coordinates.h"
 #include "Container.h"
+#include "../setup/Loaderton.h"
 
 class Queue {
 
@@ -15,8 +16,9 @@ public:
     Coordinates coordinates_;
     std::queue<Container> containerQueue_;
 
-
-
+    Queue() {
+        size_.width_ = Loaderton::Instance().getJsonData()["conveyor_belt"]["length_queue"];
+    }
 };
 
 
