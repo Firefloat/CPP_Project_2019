@@ -6,7 +6,7 @@ int main() {
     Loaderton::Instance().Setup();
     std::cout << Loaderton::Instance().getJsonData()["speed_multiplier"];
 
-    StorageManager storageManager;
+    StorageManager storageManager{};
 
     Loaderton::Instance().Save();
     return 0;

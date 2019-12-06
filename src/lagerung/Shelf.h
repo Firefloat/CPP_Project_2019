@@ -19,7 +19,7 @@ public:
 
     void Store(Container container);
     Container Remove(Coordinates coordinates);
-
+    std::vector<std::vector<FreeSpace>> GetFreeSpace();
 };
 
 

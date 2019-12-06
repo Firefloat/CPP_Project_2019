@@ -6,19 +6,25 @@ StorageManager::StorageManager() {
     float shelfDepth = Loaderton::Instance().getJsonData()["shelf"]["depth"];
     float shelfGap = Loaderton::Instance().getJsonData()["shelf"]["gap"];
 
+    int roboAmount = shelfAmount / 2;
+    robots_.reserve(roboAmount);
 
-    robots_.reserve((int)(shelfAmount / 2));
-
-    for(int index = 0; index < (int)robots_.size(); index++) {
+    for(int index = 0; index < roboAmount; index++) {
         robots_.emplace_back(Coordinates((conveyorBeltLength + ((float)index * (shelfDepth * 2 + shelfGap)) + (shelfDepth + (shelfGap / 2))), (shelfDepth / 2), 0));
     }
 
 }
 
-void StorageManager::AddToQueue(Container container) {
+void StorageManager::RemoveFromStorage(ArticleType articleType, int amount) {
     // TODO
 }
 
-void StorageManager::RemoveFromStorage(ArticleType articleType, int amount) {
+Coordinates StorageManager::FindOptimalSpace() {
+
+    auto getFreeSpaceFromShelfs = [](Robo robo) { return robo; };
+
+    for (auto robo : robots_){
+        getFreeSpaceFromShelfs(robo);
+    }
     // TODO
 }

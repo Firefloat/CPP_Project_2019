@@ -12,6 +12,7 @@
 class StorageManager {
 
 private:
+    Coordinates FindOptimalSpace();
 
 public:
     std::vector<Robo> robots_;

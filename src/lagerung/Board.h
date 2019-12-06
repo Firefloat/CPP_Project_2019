@@ -22,7 +22,6 @@ public:
     std::vector<FreeSpace> GetFreeSpace();
     void Store(Container container);
     Container Remove(Coordinates coordinates);
-
 };
 
 
