@@ -5,11 +5,12 @@
 
 int main() {
     Loaderton::Instance().Setup();
-    std::cout << Loaderton::Instance().getJsonData();
+    //std::cout << Loaderton::Instance().getJsonData();
 
     StorageManager storageManager;
     TestEnvironment environment;
-    Article c = environment.removeAmountFromStorage();
+    Article a = environment.removeAmountFromStorage();
+    Container c = environment.getNewContainer();
 
     Loaderton::Instance().Save();
     return 0;

@@ -1,7 +1,6 @@
 #include "TestEnvironment.h"
 #include <iostream>
 
-
 TestEnvironment::TestEnvironment() {
 
     sizeC1_.width_ = (double) Loaderton::Instance().getJsonData()["container"]["width_c1"];
@@ -33,7 +32,7 @@ Container TestEnvironment::getNewContainer() {
                       << " | Depth = " << sizeC2_.depth_ << std::endl;
             std::cout << "(3) Container C3: Width = " << sizeC3_.width_ << " | Hight = " << sizeC3_.height_
                       << " | Depth = " << sizeC3_.depth_ << std::endl;
-
+            std::cout << "Container: ";
             std::cin >> inputNumber;
             switch (inputNumber) {
                 case 1:
@@ -95,7 +94,9 @@ Article TestEnvironment::removeAmountFromStorage() {
     int amount;
 
     while (!isInputLegit){
-        std::cout << "Type in article type and amount to remove. Possible articles: (1)" << schrauben << " | (2)" << muttern << std::endl;
+        std::cout << "Type in article type and amount to remove. Possible articles: (1)" << schrauben << " | (2)"
+                  << muttern << std::endl;
+
         std::cout << "Article: ";
         std::cin >> inputNumber;
 

@@ -23,10 +23,7 @@ public:
 
     Container getNewContainer();
     Article removeAmountFromStorage();
-
-
-
-};
+    };
 
 
 #endif //SRC_TESTENVIRONMENT_H
