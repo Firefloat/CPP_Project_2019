@@ -1,6 +1,8 @@
 #ifndef SRC_COORDINATES_H
 #define SRC_COORDINATES_H
 
+#include <iostream>
+
 struct Coordinates {
 
 private:
@@ -21,6 +23,8 @@ public:
         y_ = y;
         z_ = z;
     }
+
+    friend std::ostream& operator << (std::ostream& ostream, Coordinates coordinates);
 
 };
 
