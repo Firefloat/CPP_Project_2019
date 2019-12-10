@@ -6,19 +6,23 @@ Shelf::Shelf() {
     size_.depth_ = Loaderton::Instance().getJsonData()["shelf"]["depth"];
     boardHeight_ = Loaderton::Instance().getJsonData()["shelf"]["height_board"];
 
-    boards_.reserve((int)(size_.height_ / boardHeight_));
+    double boardCount = (int)(size_.height_ / boardHeight_);
+    boards_.reserve(boardCount);
 
-    for(int index = 0; index < boards_.size(); index++) {
+    for(int index = 0; index < boardCount; index++) {
         boards_.emplace_back(Size(size_.width_, boardHeight_, size_.depth_), Coordinates((size_.width_ / 2), (index * boardHeight_ + boardHeight_ / 2), 0));
     }
 
 
-
-
 }
 
-void Shelf::Store(Container container) {
-    // TODO
+std::vector<std::vector<FreeSpace>> Shelf::GetFreeSpace(const Container& container){
+    // TODO get best space with priority
+    auto resultVector = std::vector<std::vector<FreeSpace>>{};
+    for (auto board : boards_){
+        resultVector.push_back(board.GetFreeSpace(container));
+    }
+    return resultVector;
 }
 
 Container Shelf::Remove(Coordinates coordinates) {

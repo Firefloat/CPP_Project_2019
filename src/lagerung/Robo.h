@@ -16,6 +16,7 @@ public:
     Queue rightQueue_;
     Shelf leftShelf_;
     Shelf rightShelf_;
+
     // TODO: Actionqueue
 
     Robo(Coordinates coordinates);

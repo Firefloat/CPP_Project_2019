@@ -1,3 +1,4 @@
+#include <iostream>
 #include "StorageManager.h"
 
 StorageManager::StorageManager() {
@@ -19,12 +20,14 @@ void StorageManager::RemoveFromStorage(ArticleType articleType, int amount) {
     // TODO
 }
 
-Coordinates StorageManager::FindOptimalSpace() {
+Coordinates StorageManager::FindOptimalSpace(const Container& container) {
 
-    auto getFreeSpaceFromShelfs = [](Robo robo) { return robo; };
+    // TODO multithreaded search
+    auto getFreeSpaceFromShelfs = [&](Shelf shelf) { return shelf.GetFreeSpace(container); };
+    auto freeSpace = std::vector<std::vector<std::vector<FreeSpace>>>{};
 
-    for (auto robo : robots_){
-        getFreeSpaceFromShelfs(robo);
+    for (const auto& robo : robots_){
+        freeSpace.push_back(getFreeSpaceFromShelfs(robo.leftShelf_));
+        freeSpace.push_back(getFreeSpaceFromShelfs(robo.rightShelf_));
     }
-    // TODO
 }
