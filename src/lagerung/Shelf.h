@@ -5,6 +5,7 @@
 #include "../setup/Loaderton.h"
 #include "Size.h"
 #include "Board.h"
+#include <cmath>
 
 class Shelf {
 
@@ -19,7 +20,7 @@ public:
 
     void Store(Container container);
     Container Remove(Coordinates coordinates);
-    std::vector<FreeSpace> GetFreeSpace(const Container& container);
+    Coordinates GetFreeSpace(const Container& container);
 };
 
 

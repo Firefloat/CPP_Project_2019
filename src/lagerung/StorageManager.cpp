@@ -25,10 +25,10 @@ Coordinates StorageManager::FindOptimalSpace(const Container& container) {
 
     // TODO multithreaded search
     auto getFreeSpaceFromShelfs = [&](Shelf shelf) { return shelf.GetFreeSpace(container); };
-    auto freeSpace = std::vector<std::vector<std::vector<FreeSpace>>>{};
+    Coordinates bestCoords{};
 
     for (const auto& robo : robots_){
-//        freeSpace.push_back(getFreeSpaceFromShelfs(robo.leftShelf_));
-//        freeSpace.push_back(getFreeSpaceFromShelfs(robo.rightShelf_));
+        std::cout << getFreeSpaceFromShelfs(robo.leftShelf_).x_ << "\n";
+        std::cout << getFreeSpaceFromShelfs(robo.rightShelf_).x_ << "\n";
     }
 }

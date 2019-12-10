@@ -4,10 +4,11 @@
 
 int main() {
     Loaderton::Instance().Setup();
-    Priority p = Priority::low;
-    std::cout << Container::prio2Pos;
+    Container testContainer{Size{ 0.6, 0.6, 0.6},
+                            Article{ArticleType::muttern, Priority::medium, 4}};
 
     StorageManager storageManager{};
+    storageManager.FindOptimalSpace(testContainer);
 
     Loaderton::Instance().Save();
     return 0;

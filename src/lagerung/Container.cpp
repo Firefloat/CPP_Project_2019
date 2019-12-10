@@ -1,6 +1,6 @@
 #include "Container.h"
 
-float Container::GetPrioPos() {
+float Container::GetPrioPos() const {
     switch (article_.priority_){
         case Priority::high : return prio1Pos;
         case Priority::medium : return prio2Pos;

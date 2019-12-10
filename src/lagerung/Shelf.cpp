@@ -17,14 +17,44 @@ Shelf::Shelf() {
 
 
 
-std::vector<FreeSpace> Shelf::GetFreeSpace(const Container& container){
-    // TODO get best space with priority
-    auto resultVector = std::vector<FreeSpace>{};
+Coordinates Shelf::GetFreeSpace(const Container& container){
+
+    Coordinates bestCoords;
+    // set difference to max value
+    double smallestDifference{MAXFLOAT};
+    // retrieve container gap
+    double containerGap = Loaderton::Instance().getJsonData()["container"]["gap"];
+    // get optimal position for container
+    double optimalPosition{container.GetPrioPos()};
 
     for (auto board : boards_){
-        //resultVector.push_back(board.GetFreeSpace(container));
+
+        for (auto freeSpace : board.GetFreeSpace(container)){
+            // TODO get vector by reference
+            double freeSpaceXCoord{freeSpace.previous_.x_ + (freeSpace.next_.x_ - freeSpace.previous_.x_)/2};
+            double absDistancePrevious{std::abs(optimalPosition - freeSpace.previous_.x_)};
+            double absDistanceNext{std::abs(optimalPosition - freeSpace.next_.x_)};
+            double absDistanceCenter{std::abs(optimalPosition - freeSpaceXCoord)};
+            // check if absolute difference is smaller than optimal
+            if (absDistancePrevious < smallestDifference) {
+                // set coordinates to new optimum
+                bestCoords = freeSpace.previous_;
+                bestCoords.x_ = freeSpace.previous_.x_ + containerGap + (container.size_.width_/2);
+                smallestDifference = absDistancePrevious;
+            }
+            if(absDistanceNext < smallestDifference) {
+                bestCoords = freeSpace.next_;
+                bestCoords.x_ = freeSpace.next_.x_ - containerGap - (container.size_.width_/2);
+                smallestDifference = absDistanceNext;
+            }
+            if(absDistanceCenter  < smallestDifference) {
+                bestCoords = freeSpace.next_;
+                bestCoords.x_ = freeSpaceXCoord;
+                smallestDifference = absDistanceCenter;
+            }
+        }
     }
-    return resultVector;
+    return bestCoords;
 }
 
 Container Shelf::Remove(Coordinates coordinates) {

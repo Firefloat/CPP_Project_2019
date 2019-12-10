@@ -12,7 +12,6 @@
 class StorageManager {
 
 private:
-    Coordinates FindOptimalSpace(const Container& container);
 
 public:
     std::vector<Robo> robots_;
@@ -21,7 +20,7 @@ public:
 
 
     StorageManager();
-
+    Coordinates FindOptimalSpace(const Container& container);
     void AddToQueue(Container container);
     void RemoveFromStorage(ArticleType articleType, int amount);
 
