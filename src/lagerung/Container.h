@@ -16,7 +16,7 @@ public:
     Article article_;
     Coordinates coordinates_;
     bool isStored = false;
-    float GetPrioPos(Priority prio);
+    float GetPrioPos();
 
     Container(Size size, Article article) : size_(size), article_(article) {};
 
