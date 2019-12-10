@@ -6,4 +6,10 @@ enum ArticleType {
     muttern
 };
 
+enum Priority{
+    high,
+    medium,
+    low
+};
+
 #endif //SRC_ARTICLETYPE_H
