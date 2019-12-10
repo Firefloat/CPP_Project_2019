@@ -19,4 +19,7 @@ void Loaderton::Save() {
 void Loaderton::Setup() {
     std::ifstream tempFile{setupFileName_};
     jsonData_ = json::parse(tempFile);
+    prio1Pos = 0;
+    prio3Pos = jsonData_["shelf"]["width"];
+    prio2Pos = prio3Pos/2;
 }

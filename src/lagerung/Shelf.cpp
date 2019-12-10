@@ -10,14 +10,14 @@ Shelf::Shelf() {
     boards_.reserve(boardCount);
 
     for(int index = 0; index < boardCount; index++) {
-        boards_.emplace_back(Size(size_.width_, boardHeight_, size_.depth_), Coordinates((size_.width_ / 2), (index * boardHeight_ + boardHeight_ / 2), 0));
+        boards_.emplace_back(Size(size_.width_, boardHeight_, size_.depth_),
+                Coordinates((size_.width_ / 2),(index * boardHeight_ + boardHeight_ / 2), 0));
     }
-
-
 }
 
-std::vector<std::vector<FreeSpace>> Shelf::GetFreeSpace(const Container& container){
 
+
+std::vector<std::vector<FreeSpace>> Shelf::GetFreeSpace(const Container& container){
     // TODO get best space with priority
     auto resultVector = std::vector<std::vector<FreeSpace>>{};
     for (auto board : boards_){

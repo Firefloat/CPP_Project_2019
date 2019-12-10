@@ -13,10 +13,13 @@ class Loaderton {
     using json = nlohmann::json;
 private:
     const int8_t intentSize_ = 4;
+    float prio1Pos, prio2Pos, prio3Pos;
     std::string setupFileName_;
     std::string saveFileName_;
     json jsonData_;
-    Loaderton() : setupFileName_("../data/setup.json"), saveFileName_("../data/save.json") {};
+    Loaderton() : setupFileName_("../data/setup.json"), saveFileName_("../data/save.json") {
+
+    };
 
 public:
     void Setup();
