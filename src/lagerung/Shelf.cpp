@@ -17,11 +17,12 @@ Shelf::Shelf() {
 
 
 
-std::vector<std::vector<FreeSpace>> Shelf::GetFreeSpace(const Container& container){
+std::vector<FreeSpace> Shelf::GetFreeSpace(const Container& container){
     // TODO get best space with priority
-    auto resultVector = std::vector<std::vector<FreeSpace>>{};
+    auto resultVector = std::vector<FreeSpace>{};
+
     for (auto board : boards_){
-        resultVector.push_back(board.GetFreeSpace(container));
+        //resultVector.push_back(board.GetFreeSpace(container));
     }
     return resultVector;
 }

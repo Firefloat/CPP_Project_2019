@@ -28,7 +28,7 @@ Coordinates StorageManager::FindOptimalSpace(const Container& container) {
     auto freeSpace = std::vector<std::vector<std::vector<FreeSpace>>>{};
 
     for (const auto& robo : robots_){
-        freeSpace.push_back(getFreeSpaceFromShelfs(robo.leftShelf_));
-        freeSpace.push_back(getFreeSpaceFromShelfs(robo.rightShelf_));
+//        freeSpace.push_back(getFreeSpaceFromShelfs(robo.leftShelf_));
+//        freeSpace.push_back(getFreeSpaceFromShelfs(robo.rightShelf_));
     }
 }

@@ -16,10 +16,15 @@ void Loaderton::Save() {
     tempFile << jsonData_.dump(intentSize_);
 }
 
+Loaderton::json Loaderton::getJsonData() {
+    if (jsonData_.empty()){
+        // for static variable initializing
+        Setup();
+    }
+    return jsonData_;
+}
+
 void Loaderton::Setup() {
     std::ifstream tempFile{setupFileName_};
     jsonData_ = json::parse(tempFile);
-    prio1Pos = 0;
-    prio3Pos = jsonData_["shelf"]["width"];
-    prio2Pos = prio3Pos/2;
 }
