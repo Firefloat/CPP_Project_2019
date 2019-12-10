@@ -17,7 +17,6 @@ public:
     Coordinates coordinates_;
     bool isStored = false;
     float GetPrioPos() const;
-
     Container(Size size, Article article) : size_(size), article_(article) {};
 
 };
