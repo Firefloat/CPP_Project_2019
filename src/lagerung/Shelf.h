@@ -12,6 +12,7 @@ class Shelf {
 private:
 
 public:
+    Coordinates coordinates_;
     Size size_;
     double boardHeight_;
     std::vector<Board> boards_;
