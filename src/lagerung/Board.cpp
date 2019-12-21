@@ -9,8 +9,8 @@ std::vector<FreeSpace> Board::GetFreeSpace(const Container& container) {
     auto resultVector = std::vector<FreeSpace>{};
 
     // get coordinates of start and end of board
-    Coordinates tempCoordsPrev{coordinates_.x_-0.5*size_.width_, coordinates_.y_, coordinates_.z_};
-    Coordinates tempCoordsNext{coordinates_.x_+0.5*size_.width_, coordinates_.y_, coordinates_.z_};
+    Coordinates tempCoordsPrev{coordinates_.x_, coordinates_.y_, coordinates_.z_-0.5*size_.width_};
+    Coordinates tempCoordsNext{coordinates_.x_, coordinates_.y_, coordinates_.z_+0.5*size_.width_};
 
     // if no container is stored, return whole board as empty
     if (storedContainers_.empty()){
@@ -20,20 +20,20 @@ std::vector<FreeSpace> Board::GetFreeSpace(const Container& container) {
     else{
         for (auto containerLoop : storedContainers_){
             // calculate start and end coordinates of container
-            auto start = containerLoop.coordinates_.x_ - 0.5*containerLoop.size_.width_;
-            auto end = containerLoop.coordinates_.x_ + 0.5*containerLoop.size_.width_;
+            auto start = containerLoop.coordinates_.z_ - 0.5*containerLoop.size_.width_;
+            auto end = containerLoop.coordinates_.z_ + 0.5*containerLoop.size_.width_;
 
             // if container is at start of shelf or at the end of another container
-            if (start == tempCoordsPrev.x_){
-                tempCoordsPrev.x_ = end;
+            if (start == tempCoordsPrev.z_){
+                tempCoordsPrev.z_ = end;
                 continue;
             }
             else{
-                tempCoordsNext.x_ = start;
+                tempCoordsNext.z_ = start;
                 if ((end - start) >= container.size_.width_){
                     resultVector.emplace_back(tempCoordsPrev, tempCoordsNext);
                 }
-                tempCoordsPrev.x_ = end;
+                tempCoordsPrev.z_ = end;
             }
             // TODO Verify if it works as intended
         }

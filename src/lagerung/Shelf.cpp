@@ -39,25 +39,25 @@ Coordinates Shelf::GetFreeSpace(const Container& container){
 
         for (auto freeSpace : board.GetFreeSpace(container)){
             // TODO get vector by reference
-            double freeSpaceXCoord{freeSpace.previous_.x_ + (freeSpace.next_.x_ - freeSpace.previous_.x_)/2};
-            double absDistancePrevious{std::abs(optimalPosition - freeSpace.previous_.x_)};
-            double absDistanceNext{std::abs(optimalPosition - freeSpace.next_.x_)};
+            double freeSpaceXCoord{freeSpace.previous_.z_ + (freeSpace.next_.z_ - freeSpace.previous_.z_)/2};
+            double absDistancePrevious{std::abs(optimalPosition - freeSpace.previous_.z_)};
+            double absDistanceNext{std::abs(optimalPosition - freeSpace.next_.z_)};
             double absDistanceCenter{std::abs(optimalPosition - freeSpaceXCoord)};
             // check if absolute difference is smaller than optimal
             if (absDistancePrevious < smallestDifference) {
                 // set coordinates to new optimum
                 bestCoords = freeSpace.previous_;
-                bestCoords.x_ = freeSpace.previous_.x_ + containerGap + (container.size_.width_/2);
+                bestCoords.z_ = freeSpace.previous_.z_ + containerGap + (container.size_.width_/2);
                 smallestDifference = absDistancePrevious;
             }
             if(absDistanceNext < smallestDifference) {
                 bestCoords = freeSpace.next_;
-                bestCoords.x_ = freeSpace.next_.x_ - containerGap - (container.size_.width_/2);
+                bestCoords.z_ = freeSpace.next_.z_ - containerGap - (container.size_.width_/2);
                 smallestDifference = absDistanceNext;
             }
             if(absDistanceCenter  < smallestDifference) {
                 bestCoords = freeSpace.next_;
-                bestCoords.x_ = freeSpaceXCoord;
+                bestCoords.z_ = freeSpaceXCoord;
                 smallestDifference = absDistanceCenter;
             }
         }
