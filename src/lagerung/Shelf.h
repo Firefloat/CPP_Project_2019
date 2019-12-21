@@ -23,7 +23,7 @@ public:
 
     void Store(Container container);
     Container Remove(Coordinates coordinates);
-    Coordinates GetFreeSpace(const Container& container);
+    std::tuple<Coordinates, double> GetFreeSpace(const Container& container);
 };
 
 
