@@ -24,16 +24,28 @@ void StorageManager::RemoveFromStorage(ArticleType articleType, int amount) {
 Coordinates StorageManager::FindOptimalSpace(const Container& container) {
 
     auto getFreeSpaceFromShelfs = [&](Shelf shelf) { return shelf.GetFreeSpace(container); };
+    std::tuple<Coordinates, int> resultTuple;
+    double smallestDifference{MAXFLOAT};
     Coordinates bestCoords{};
-    // for debugging only
-    int i{1};
+
     for (const auto& robo : robots_){
-        std::cout << "-----------------------------------------------" << "\n";
-        std::cout << "Shelf number " << i << " and " << i+1 << "\n";
-        bestCoords = getFreeSpaceFromShelfs(robo.leftShelf_);
-        std::cout << bestCoords << "\n";
-        bestCoords = getFreeSpaceFromShelfs(robo.rightShelf_);
-        std::cout << bestCoords << "\n";
-        i+=2;
+        // retrieve tuple from left shelf
+        resultTuple = getFreeSpaceFromShelfs(robo.leftShelf_);
+
+        // check if left shelf has best space, with smallest gap
+        if (std::get<1>(resultTuple) < smallestDifference){
+            bestCoords = std::get<0>(resultTuple);
+            smallestDifference = std::get<1>(resultTuple);
+        }
+
+        // retrieve tuple from right shelf
+        resultTuple = getFreeSpaceFromShelfs(robo.rightShelf_);
+
+        // check if right shelf has best space, with smallest gap
+        if (std::get<1>(resultTuple) < smallestDifference){
+            bestCoords = std::get<0>(resultTuple);
+            smallestDifference = std::get<1>(resultTuple);
+        }
     }
+    return bestCoords;
 }

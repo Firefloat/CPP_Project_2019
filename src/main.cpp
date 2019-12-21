@@ -8,7 +8,10 @@ int main() {
                             Article{ArticleType::muttern, Priority::high, 4}};
 
     StorageManager storageManager{};
-    storageManager.FindOptimalSpace(testContainer);
+    Coordinates bestCoords = storageManager.FindOptimalSpace(testContainer);
+
+    std::cout << "Best Place found:" << "\n";
+    std::cout << bestCoords << "\n";
 
     Loaderton::Instance().Save();
     return 0;
