@@ -4,9 +4,18 @@
 
 int main() {
     Loaderton::Instance().Setup();
-    std::cout << Loaderton::Instance().getJsonData()["speed_multiplier"];
 
+    // initialize test container
+    Container testContainer{Size{ 0.6, 0.6, 0.6},
+                            Article{ArticleType::muttern, Priority::high, 4}};
+
+    // create storage manager and find best place for test container
     StorageManager storageManager{};
+    Coordinates bestCoords = storageManager.FindOptimalSpace(testContainer);
+
+    // printing
+    std::cout << "Best Place found:" << "\n";
+    std::cout << bestCoords << "\n";
 
     Loaderton::Instance().Save();
     return 0;

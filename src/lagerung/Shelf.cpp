@@ -1,6 +1,7 @@
 #include "Shelf.h"
 
-Shelf::Shelf() {
+// method for initializing
+void Shelf::init(){
     size_.width_ = Loaderton::Instance().getJsonData()["shelf"]["width"];
     size_.height_ = Loaderton::Instance().getJsonData()["shelf"]["height_total"];
     size_.depth_ = Loaderton::Instance().getJsonData()["shelf"]["depth"];
@@ -10,19 +11,57 @@ Shelf::Shelf() {
     boards_.reserve(boardCount);
 
     for(int index = 0; index < boardCount; index++) {
-        boards_.emplace_back(Size(size_.width_, boardHeight_, size_.depth_), Coordinates((size_.width_ / 2), (index * boardHeight_ + boardHeight_ / 2), 0));
+        boards_.emplace_back(Size(size_.width_, boardHeight_, size_.depth_),
+                             Coordinates(coordinates_.x_,(index * boardHeight_ + boardHeight_ / 2), (size_.width_ / 2)));
     }
-
-
 }
 
-std::vector<std::vector<FreeSpace>> Shelf::GetFreeSpace(const Container& container){
-    // TODO get best space with priority
-    auto resultVector = std::vector<std::vector<FreeSpace>>{};
+Shelf::Shelf(){
+    init();
+}
+
+Shelf::Shelf(Coordinates coordinates) : coordinates_(coordinates){
+    init();
+}
+
+
+std::tuple<Coordinates, double> Shelf::GetFreeSpace(const Container& container){
+
+    Coordinates bestCoords;
+    // set difference to max value
+    double smallestDifference{MAXFLOAT};
+    // retrieve container gap
+    double containerGap = Loaderton::Instance().getJsonData()["container"]["gap"];
+    // get optimal position for container
+    double optimalPosition{container.GetPrioPos()};
+
     for (auto board : boards_){
-        resultVector.push_back(board.GetFreeSpace(container));
+        for (auto freeSpace : board.GetFreeSpace(container)){
+            // TODO get vector by reference
+            double freeSpaceXCoord{freeSpace.previous_.z_ + (freeSpace.next_.z_ - freeSpace.previous_.z_)/2};
+            double absDistancePrevious{std::abs(optimalPosition - freeSpace.previous_.z_)};
+            double absDistanceNext{std::abs(optimalPosition - freeSpace.next_.z_)};
+            double absDistanceCenter{std::abs(optimalPosition - freeSpaceXCoord)};
+            // check if absolute difference is smaller than optimal
+            if (absDistancePrevious < smallestDifference) {
+                // set coordinates to new optimum
+                bestCoords = freeSpace.previous_;
+                bestCoords.z_ = freeSpace.previous_.z_ + containerGap + (container.size_.width_/2);
+                smallestDifference = absDistancePrevious;
+            }
+            if(absDistanceNext < smallestDifference) {
+                bestCoords = freeSpace.next_;
+                bestCoords.z_ = freeSpace.next_.z_ - containerGap - (container.size_.width_/2);
+                smallestDifference = absDistanceNext;
+            }
+            if(absDistanceCenter  < smallestDifference) {
+                bestCoords = freeSpace.next_;
+                bestCoords.z_ = freeSpaceXCoord;
+                smallestDifference = absDistanceCenter;
+            }
+        }
     }
-    return resultVector;
+    return std::make_tuple(bestCoords, smallestDifference);
 }
 
 Container Shelf::Remove(Coordinates coordinates) {

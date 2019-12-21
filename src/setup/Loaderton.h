@@ -16,13 +16,15 @@ private:
     std::string setupFileName_;
     std::string saveFileName_;
     json jsonData_;
-    Loaderton() : setupFileName_("../data/setup.json"), saveFileName_("../data/save.json") {};
+    Loaderton() : setupFileName_("../data/setup.json"), saveFileName_("../data/save.json") {
+
+    };
 
 public:
     void Setup();
     void Save();
     void Load();
-    json getJsonData() { return jsonData_; }
+    json getJsonData();
 
     // delete copy constructor and assignment operator
     Loaderton(Loaderton &) = delete;

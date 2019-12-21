@@ -9,13 +9,11 @@ private:
 
 public:
     ArticleType type_;
-    unsigned short priority_;
+    Priority priority_;
     unsigned int quantity_;
 
-    Article(ArticleType type, unsigned short priority, unsigned int quantity) {
-        type_ = type;
-        priority_ = priority;
-        quantity_ = quantity;
+    Article(ArticleType type, Priority priority, unsigned int quantity) : type_(type), priority_(priority), quantity_(quantity) {
+
     }
 
 };
