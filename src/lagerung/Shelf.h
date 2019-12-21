@@ -18,6 +18,7 @@ public:
     std::vector<Board> boards_;
 
     Shelf();
+    Shelf(Coordinates coordinates);
 
     void Store(Container container);
     Container Remove(Coordinates coordinates);

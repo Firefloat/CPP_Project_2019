@@ -11,10 +11,14 @@ Shelf::Shelf() {
 
     for(int index = 0; index < boardCount; index++) {
         boards_.emplace_back(Size(size_.width_, boardHeight_, size_.depth_),
-                Coordinates((size_.width_ / 2),(index * boardHeight_ + boardHeight_ / 2), 0));
+                Coordinates(coordinates_.x_,(index * boardHeight_ + boardHeight_ / 2), (size_.width_ / 2)));
     }
 }
 
+Shelf::Shelf(Coordinates coordinates) : coordinates_(coordinates){
+    // lean on standard constructor
+    Shelf();
+}
 
 
 Coordinates Shelf::GetFreeSpace(const Container& container){
