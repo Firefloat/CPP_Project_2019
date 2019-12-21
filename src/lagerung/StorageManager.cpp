@@ -25,9 +25,15 @@ Coordinates StorageManager::FindOptimalSpace(const Container& container) {
 
     auto getFreeSpaceFromShelfs = [&](Shelf shelf) { return shelf.GetFreeSpace(container); };
     Coordinates bestCoords{};
-
+    // for debugging only
+    int i{1};
     for (const auto& robo : robots_){
-        std::cout << getFreeSpaceFromShelfs(robo.leftShelf_) << "\n";
-        std::cout << getFreeSpaceFromShelfs(robo.rightShelf_) << "\n";
+        std::cout << "-----------------------------------------------" << "\n";
+        std::cout << "Shelf number " << i << " and " << i+1 << "\n";
+        bestCoords = getFreeSpaceFromShelfs(robo.leftShelf_);
+        std::cout << bestCoords << "\n";
+        bestCoords = getFreeSpaceFromShelfs(robo.rightShelf_);
+        std::cout << bestCoords << "\n";
+        i+=2;
     }
 }

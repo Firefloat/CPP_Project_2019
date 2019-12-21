@@ -5,7 +5,7 @@
 int main() {
     Loaderton::Instance().Setup();
     Container testContainer{Size{ 0.6, 0.6, 0.6},
-                            Article{ArticleType::muttern, Priority::medium, 4}};
+                            Article{ArticleType::muttern, Priority::high, 4}};
 
     StorageManager storageManager{};
     storageManager.FindOptimalSpace(testContainer);
