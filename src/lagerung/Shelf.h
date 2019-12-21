@@ -10,6 +10,7 @@
 class Shelf {
 
 private:
+    void init();
 
 public:
     Coordinates coordinates_;

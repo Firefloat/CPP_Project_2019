@@ -1,6 +1,7 @@
 #include "Shelf.h"
 
-Shelf::Shelf() {
+// method for initializing
+void Shelf::init(){
     size_.width_ = Loaderton::Instance().getJsonData()["shelf"]["width"];
     size_.height_ = Loaderton::Instance().getJsonData()["shelf"]["height_total"];
     size_.depth_ = Loaderton::Instance().getJsonData()["shelf"]["depth"];
@@ -11,13 +12,16 @@ Shelf::Shelf() {
 
     for(int index = 0; index < boardCount; index++) {
         boards_.emplace_back(Size(size_.width_, boardHeight_, size_.depth_),
-                Coordinates(coordinates_.x_,(index * boardHeight_ + boardHeight_ / 2), (size_.width_ / 2)));
+                             Coordinates(coordinates_.x_,(index * boardHeight_ + boardHeight_ / 2), (size_.width_ / 2)));
     }
 }
 
+Shelf::Shelf(){
+    init();
+}
+
 Shelf::Shelf(Coordinates coordinates) : coordinates_(coordinates){
-    // lean on standard constructor
-    Shelf();
+    init();
 }
 
 

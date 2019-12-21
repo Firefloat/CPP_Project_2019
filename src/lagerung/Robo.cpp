@@ -19,6 +19,6 @@ Robo::Robo(Coordinates coordinates) : coordinates_(coordinates){
     rightQueue_.coordinates_ = Coordinates{xRight, coordinates_.y_, coordinates_.z_};
 
     // initialize coordinates of shelfs
-    leftShelf_.coordinates_ = Coordinates{xLeft, yShelf, zShelf};
-    rightShelf_.coordinates_ = Coordinates{xRight, yShelf, zShelf};
+    leftShelf_ = Shelf{Coordinates{xLeft, yShelf, zShelf}};
+    rightShelf_ = Shelf{Coordinates{xRight, yShelf, zShelf}};
 }
