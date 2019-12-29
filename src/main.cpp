@@ -9,10 +9,14 @@ int main() {
     Container testContainer{Size{ 0.6, 0.6, 0.6},
                             Article{ArticleType::muttern, Priority::high, 4}};
 
-    // create storage manager and find best place for test container
+    // create storage manager
     StorageManager storageManager{};
-    Coordinates bestCoords = storageManager.FindOptimalSpace(testContainer);
 
+    // find best place with async search
+    auto getBestCoords = std::async(std::launch::async, &StorageManager::FindOptimalSpace, std::ref(storageManager),
+            std::ref(testContainer));
+    auto bestCoords = getBestCoords.get();
+    
     // printing
     std::cout << "Best Place found:" << "\n";
     std::cout << bestCoords << "\n";
