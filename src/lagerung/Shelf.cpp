@@ -37,7 +37,7 @@ std::tuple<Coordinates, double> Shelf::GetFreeSpace(const Container& container){
 
     for (auto board : boards_){
         for (auto freeSpace : board.GetFreeSpace(container)){
-            // TODO get vector by reference
+            // TODO: get vector by reference
             double freeSpaceXCoord{freeSpace.previous_.z_ + (freeSpace.next_.z_ - freeSpace.previous_.z_)/2};
             double absDistancePrevious{std::abs(optimalPosition - freeSpace.previous_.z_)};
             double absDistanceNext{std::abs(optimalPosition - freeSpace.next_.z_)};
