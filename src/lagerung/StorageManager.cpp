@@ -73,14 +73,4 @@ Robo& StorageManager::FindRoboByX(float xCoord) {
             return robo;
         }
     }
-//
-//    auto roboIndex = (xCoord - conveyorBeltLength_ - (shelfDepth_ + (shelfGap_ / 2))) /
-//                     (shelfDepth_ * 2 + shelfGap_);
-//
-//    // just for debug TODO: remove
-//    std::cout << "index: " << roboIndex << "\n";
-//    std::cout << "--------------------------" << "\n\n";
-//
-//    // return robot at index position
-//    return robots_[roboIndex];
 }
