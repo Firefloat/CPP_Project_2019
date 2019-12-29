@@ -65,9 +65,7 @@ void Robo::Do() {
 
     switch (action.first) {
         case FunctionStore:
-            std::future<bool> doAction = std::async(Robo::Store, this, action.second);
-
-
+            std::future<bool> doAction = std::async(&Robo::Store, this, action.second);
             break;
         case FunctionRemove:
 
@@ -79,6 +77,7 @@ void Robo::Do() {
 
 bool Robo::Store(Coordinates coordinates) {
     // TODO Storing - Remove from Queue
+    std::this_thread::sleep_for(std::chrono::duration<double, std::ratio<1, 1000>>(GetMovingTime(coordinates) * 1000))
     Sleep(GetMovingTime(inputCoordinates_) * 1000);
     Sleep(timeStoreRestore_ * 1000);
     Sleep(GetMovingTime(coordinates) * 1000);

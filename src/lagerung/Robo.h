@@ -4,7 +4,8 @@
 #include <math.h>
 #include <queue>
 #include <future>
-#include "windows.h"
+#include <chrono>
+#include <thread>
 #include "Queue.h"
 #include "Coordinates.h"
 #include "Shelf.h"
