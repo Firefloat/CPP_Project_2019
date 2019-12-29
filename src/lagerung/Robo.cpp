@@ -7,10 +7,23 @@ Robo::Robo(Coordinates coordinates, Coordinates inputCoordinates, Coordinates ou
     horizontalVelocity_ = Loaderton::Instance().getJsonData()["robo"]["horizontal_velocity"];
     timeStoreRestore_ = Loaderton::Instance().getJsonData()["robo"]["time_store_restore"];
 
-    // Calculate left and right x-coordinates of queues
-    double xLeft = coordinates_.x_ - 0.5*(static_cast<double>(Loaderton::Instance().getJsonData()["shelf"]["gap"])) -
-            0.5*(static_cast<double>(Loaderton::Instance().getJsonData()["shelf"]["depth"]));
+    double xLeft, xRight, yShelf, zShelf;
 
+    // calculate left and right x-coordinates of queues and shelfs
+    xLeft = coordinates_.x_ - 0.5*(static_cast<double>(Loaderton::Instance().getJsonData()["shelf"]["gap"])) -
+            0.5*(static_cast<double>(Loaderton::Instance().getJsonData()["shelf"]["depth"]));
+    xRight = coordinates_.x_ + 0.5*(static_cast<double>(Loaderton::Instance().getJsonData()["shelf"]["gap"])) +
+             0.5*(static_cast<double>(Loaderton::Instance().getJsonData()["shelf"]["depth"]));
+
+    // calculate y and z coordinates of shelfs
+    yShelf = static_cast<double>(Loaderton::Instance().getJsonData()["shelf"]["height_total"])/2;
+    zShelf = static_cast<double>(Loaderton::Instance().getJsonData()["shelf"]["width"])/2;
+
+    // initialize coordinates of shelfs
+    leftShelf_ = Shelf{Coordinates{xLeft, yShelf, zShelf}};
+    rightShelf_ = Shelf{Coordinates{xRight, yShelf, zShelf}};
+
+    // coordinates of queue
     queue_.coordinates_ = Coordinates{xLeft, coordinates_.y_, coordinates_.z_};
 }
 
