@@ -88,10 +88,10 @@ bool Robo::Store(Coordinates coordinates) {
 
 bool Robo::Remove(Coordinates coordinates) {
     // TODO Remove from Shelf
-    Sleep(GetMovingTime(coordinates) * 1000);
-    Sleep(timeStoreRestore_ * 1000);
-    Sleep(GetMovingTime(outputCoordinates_) * 1000);
-    Sleep(timeStoreRestore_ * 1000);
+    std::this_thread::sleep_for(std::chrono::duration<double>(GetMovingTime(coordinates)));
+    std::this_thread::sleep_for(std::chrono::duration<double>(timeStoreRestore_));
+    std::this_thread::sleep_for(std::chrono::duration<double>(GetMovingTime(outputCoordinates_)));
+    std::this_thread::sleep_for(std::chrono::duration<double>(timeStoreRestore_));
     return true;
 }
 
