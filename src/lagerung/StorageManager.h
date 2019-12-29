@@ -12,18 +12,15 @@
 class StorageManager {
 
 private:
-
+    Robo& FindRoboByX(float xCoord);
 public:
     std::vector<Robo> robots_;
     // dict / list Article -> quantity is stored in Article
     std::queue<Container> toStore;
-
-
     StorageManager();
     Coordinates FindOptimalSpace(const Container& container);
     void AddToQueue(Container container);
     void RemoveFromStorage(ArticleType articleType, int amount);
-
 };
 
 

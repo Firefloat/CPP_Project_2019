@@ -90,6 +90,7 @@ void Robo::Do() {
 
 bool Robo::Store(Coordinates coordinates) {
     // TODO Storing - Remove from Queue
+
     std::this_thread::sleep_for(std::chrono::duration<double>(GetMovingTime(inputCoordinates_)));
     std::this_thread::sleep_for(std::chrono::duration<double>(timeStoreRestore_));
     std::this_thread::sleep_for(std::chrono::duration<double>(GetMovingTime(coordinates)));

@@ -53,3 +53,7 @@ Coordinates StorageManager::FindOptimalSpace(const Container& container) {
     }
     return bestCoords;
 }
+
+Robo& StorageManager::FindRoboByX(float xCoord) {
+    // TODO: find right robo
+}
