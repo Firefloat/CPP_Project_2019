@@ -12,6 +12,8 @@
 class StorageManager {
 
 private:
+    int shelfAmount_;
+    float conveyorBeltLength_, shelfDepth_, shelfGap_, shelfHeight_;
     Robo& FindRoboByX(float xCoord);
 public:
     std::vector<Robo> robots_;

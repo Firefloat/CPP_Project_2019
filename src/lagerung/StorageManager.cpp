@@ -2,21 +2,22 @@
 #include "StorageManager.h"
 
 StorageManager::StorageManager() {
-    int shelfAmount = Loaderton::Instance().getJsonData()["shelf"]["amount"];
-    float conveyorBeltLength = Loaderton::Instance().getJsonData()["conveyor_belt"]["length_to_first_shelf"];
-    float shelfDepth = Loaderton::Instance().getJsonData()["shelf"]["depth"];
-    float shelfGap = Loaderton::Instance().getJsonData()["shelf"]["gap"];
-    float shelfHeight = Loaderton::Instance().getJsonData()["shelf"]["height_total"];
+    shelfAmount_ = Loaderton::Instance().getJsonData()["shelf"]["amount"];
+    conveyorBeltLength_ = Loaderton::Instance().getJsonData()["conveyor_belt"]["length_to_first_shelf"];
+    shelfDepth_ = Loaderton::Instance().getJsonData()["shelf"]["depth"];
+    shelfGap_ = Loaderton::Instance().getJsonData()["shelf"]["gap"];
+    shelfHeight_ = Loaderton::Instance().getJsonData()["shelf"]["height_total"];
 
-    int roboAmount = shelfAmount / 2;
+    int roboAmount = shelfAmount_ / 2;
     robots_.reserve(roboAmount);
 
     for(int index = 0; index < roboAmount; index++) {
-        double roboPositionX = (conveyorBeltLength + ((float)index * (shelfDepth * 2 + shelfGap)) + (shelfDepth + (shelfGap / 2)));
+        double roboPositionX = (conveyorBeltLength_ + ((float)index * (shelfDepth_ * 2 + shelfGap_)) +
+                (shelfDepth_ + (shelfGap_ / 2)));
 
         robots_.emplace_back(
-                Coordinates{roboPositionX,(shelfDepth / 2), 0},
-                Coordinates{roboPositionX,(shelfDepth / 2), 0},
+                Coordinates{roboPositionX,(shelfDepth_ / 2), 0},
+                Coordinates{roboPositionX,(shelfDepth_ / 2), 0},
                 Coordinates{roboPositionX, 0, 0});
     }
 }
