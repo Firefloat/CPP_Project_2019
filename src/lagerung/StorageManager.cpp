@@ -23,7 +23,7 @@ StorageManager::StorageManager() {
 }
 
 void StorageManager::RemoveFromStorage(ArticleType articleType, int amount) {
-    // TODO
+    // TODO: remove item from storage
 }
 
 Coordinates StorageManager::FindOptimalSpace(const Container& container) {
@@ -56,5 +56,31 @@ Coordinates StorageManager::FindOptimalSpace(const Container& container) {
 }
 
 Robo& StorageManager::FindRoboByX(float xCoord) {
-    // TODO: find right robo
+
+    // needed for float comparison with error margin
+    double epsilon = 0.01f;
+
+    // calculate offset from shelf to robo
+    double offset = (shelfDepth_ + shelfGap_) * 0.5;
+
+    // iterate over vector and find robot
+    for (auto &robo : robots_){
+        // if absolute values are less than epsilon, coordinates are almost the same
+        if (std::fabs((xCoord + offset) - robo.coordinates_.x_) < epsilon){
+            return robo;
+        }
+        if (std::fabs((xCoord - offset) - robo.coordinates_.x_) < epsilon){
+            return robo;
+        }
+    }
+//
+//    auto roboIndex = (xCoord - conveyorBeltLength_ - (shelfDepth_ + (shelfGap_ / 2))) /
+//                     (shelfDepth_ * 2 + shelfGap_);
+//
+//    // just for debug TODO: remove
+//    std::cout << "index: " << roboIndex << "\n";
+//    std::cout << "--------------------------" << "\n\n";
+//
+//    // return robot at index position
+//    return robots_[roboIndex];
 }

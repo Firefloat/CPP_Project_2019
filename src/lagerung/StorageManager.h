@@ -14,7 +14,6 @@ class StorageManager {
 private:
     int shelfAmount_;
     float conveyorBeltLength_, shelfDepth_, shelfGap_, shelfHeight_;
-    Robo& FindRoboByX(float xCoord);
 public:
     std::vector<Robo> robots_;
     // dict / list Article -> quantity is stored in Article
@@ -23,6 +22,9 @@ public:
     Coordinates FindOptimalSpace(const Container& container);
     void AddToQueue(Container container);
     void RemoveFromStorage(ArticleType articleType, int amount);
+
+    // for debugging only TODO: move to private
+    Robo& FindRoboByX(float xCoord);
 };
 
 
