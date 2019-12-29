@@ -16,7 +16,7 @@ int main() {
     auto getBestCoords = std::async(std::launch::async, &StorageManager::FindOptimalSpace, std::ref(storageManager),
             std::ref(testContainer));
     auto bestCoords = getBestCoords.get();
-    
+
     // printing
     std::cout << "Best Place found:" << "\n";
     std::cout << bestCoords << "\n";
