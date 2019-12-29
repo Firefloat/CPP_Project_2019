@@ -6,6 +6,7 @@ StorageManager::StorageManager() {
     float conveyorBeltLength = Loaderton::Instance().getJsonData()["conveyor_belt"]["length_to_first_shelf"];
     float shelfDepth = Loaderton::Instance().getJsonData()["shelf"]["depth"];
     float shelfGap = Loaderton::Instance().getJsonData()["shelf"]["gap"];
+    float shelfHeight = Loaderton::Instance().getJsonData()["shelf"]["height_total"];
 
     int roboAmount = shelfAmount / 2;
     robots_.reserve(roboAmount);
@@ -15,6 +16,7 @@ StorageManager::StorageManager() {
                 (conveyorBeltLength + ((float)index * (shelfDepth * 2 + shelfGap)) + (shelfDepth + (shelfGap / 2))),
                 (shelfDepth / 2), 0));
     }
+
 }
 
 void StorageManager::RemoveFromStorage(ArticleType articleType, int amount) {
