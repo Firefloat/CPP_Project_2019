@@ -62,16 +62,14 @@ void Robo::AddToActionQueue(FunctionType functionType, Coordinates coordinates) 
 void Robo::Do() {
 
     auto action = actionQueue_.front();
-
+    std::future<bool> doAction;
     switch (action.first) {
         case FunctionStore:
-            std::future<bool> doAction = std::async(&Robo::Store, this, action.second);
-
-
+            doAction = std::async(&Robo::Store, this, action.second);
             break;
+            
         case FunctionRemove:
-
-
+            doAction = std::async(&Robo::Remove, this, action.second);
             break;
     }
 }
