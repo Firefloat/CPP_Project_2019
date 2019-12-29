@@ -12,11 +12,13 @@ StorageManager::StorageManager() {
     robots_.reserve(roboAmount);
 
     for(int index = 0; index < roboAmount; index++) {
-        robots_.emplace_back(Coordinates(
-                (conveyorBeltLength + ((float)index * (shelfDepth * 2 + shelfGap)) + (shelfDepth + (shelfGap / 2))),
-                (shelfDepth / 2), 0));
-    }
+        double roboPositionX = (conveyorBeltLength + ((float)index * (shelfDepth * 2 + shelfGap)) + (shelfDepth + (shelfGap / 2)));
 
+        robots_.emplace_back(
+                Coordinates{roboPositionX,(shelfDepth / 2), 0},
+                Coordinates{roboPositionX,(shelfDepth / 2), 0},
+                Coordinates{roboPositionX, 0, 0});
+    }
 }
 
 void StorageManager::RemoveFromStorage(ArticleType articleType, int amount) {
