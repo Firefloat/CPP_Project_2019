@@ -35,16 +35,16 @@ std::vector<FreeSpace> Board::GetFreeSpace(const Container& container) {
                 }
                 tempCoordsPrev.z_ = end;
             }
-            // TODO Verify if it works as intended
+            // TODO: Verify if it works as intended
         }
     }
     return resultVector;
 }
 
 void Board::Store(Container container) {
-    // TODO
+    // TODO: store container thread safe
 }
 
 Container Board::Remove(Coordinates coordinates) {
-    // TODO
+    // TODO: remove container thread safe
 }
