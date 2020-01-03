@@ -67,3 +67,7 @@ std::tuple<Coordinates, double> Shelf::GetFreeSpace(const Container& container){
 Container Shelf::Remove(Coordinates coordinates) {
     // TODO
 }
+
+void Shelf::Store(Container container) {
+
+}
