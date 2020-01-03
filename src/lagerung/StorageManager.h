@@ -23,7 +23,7 @@ public:
     void RemoveFromStorage(ArticleType articleType, int amount);
 
     // for debugging only TODO: move to private
-    Robo& FindRoboByX(double xCoord);
+    Robo& FindRoboByContainerXCoord(double xCoord);
 };
 
 

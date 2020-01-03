@@ -55,7 +55,7 @@ Coordinates StorageManager::FindOptimalSpace(const Container& container) {
     return bestCoords;
 }
 
-Robo& StorageManager::FindRoboByX(double xCoord) {
+Robo& StorageManager::FindRoboByContainerXCoord(double xCoord) {
 
     // needed for float comparison with error margin
     double epsilon = 0.01f;
@@ -77,6 +77,6 @@ Robo& StorageManager::FindRoboByX(double xCoord) {
 
 void StorageManager::AddToQueue(const Container &container) {
     auto bestPlace = FindOptimalSpace(container);
-    auto roboToStore = FindRoboByX(bestPlace.x_);
+    auto roboToStore = FindRoboByContainerXCoord(bestPlace.x_);
     // TODO: store to robo
 }

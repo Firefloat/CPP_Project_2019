@@ -22,22 +22,22 @@ int main() {
     std::cout << bestCoords << "\n";
 
     // test if robots get found by shelf coordinates TODO: remove
-    std:: cout << storageManager.FindRoboByX(5.4).coordinates_;
-    std:: cout << storageManager.FindRoboByX(8.2).coordinates_;
-    std:: cout << storageManager.FindRoboByX(9).coordinates_;
-    std:: cout << storageManager.FindRoboByX(11.8).coordinates_;
-    std:: cout << storageManager.FindRoboByX(12.6).coordinates_;
-    std:: cout << storageManager.FindRoboByX(15.4).coordinates_;
-    std:: cout << storageManager.FindRoboByX(16.2).coordinates_;
-    std:: cout << storageManager.FindRoboByX(19).coordinates_;
-    std:: cout << storageManager.FindRoboByX(19.8).coordinates_;
-    std:: cout << storageManager.FindRoboByX(22.6).coordinates_;
-    std:: cout << storageManager.FindRoboByX(23.4).coordinates_;
-    std:: cout << storageManager.FindRoboByX(26.2).coordinates_;
-    std:: cout << storageManager.FindRoboByX(27).coordinates_;
-    std:: cout << storageManager.FindRoboByX(29.8).coordinates_;
-    std:: cout << storageManager.FindRoboByX(30.6).coordinates_;
-    std:: cout << storageManager.FindRoboByX(33.4).coordinates_;
+    std:: cout << storageManager.FindRoboByContainerXCoord(5.4).coordinates_;
+    std:: cout << storageManager.FindRoboByContainerXCoord(8.2).coordinates_;
+    std:: cout << storageManager.FindRoboByContainerXCoord(9).coordinates_;
+    std:: cout << storageManager.FindRoboByContainerXCoord(11.8).coordinates_;
+    std:: cout << storageManager.FindRoboByContainerXCoord(12.6).coordinates_;
+    std:: cout << storageManager.FindRoboByContainerXCoord(15.4).coordinates_;
+    std:: cout << storageManager.FindRoboByContainerXCoord(16.2).coordinates_;
+    std:: cout << storageManager.FindRoboByContainerXCoord(19).coordinates_;
+    std:: cout << storageManager.FindRoboByContainerXCoord(19.8).coordinates_;
+    std:: cout << storageManager.FindRoboByContainerXCoord(22.6).coordinates_;
+    std:: cout << storageManager.FindRoboByContainerXCoord(23.4).coordinates_;
+    std:: cout << storageManager.FindRoboByContainerXCoord(26.2).coordinates_;
+    std:: cout << storageManager.FindRoboByContainerXCoord(27).coordinates_;
+    std:: cout << storageManager.FindRoboByContainerXCoord(29.8).coordinates_;
+    std:: cout << storageManager.FindRoboByContainerXCoord(30.6).coordinates_;
+    std:: cout << storageManager.FindRoboByContainerXCoord(33.4).coordinates_;
 
     Loaderton::Instance().Save();
     return 0;
