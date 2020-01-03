@@ -11,11 +11,14 @@
 class Board {
 
 private:
+    std::mutex protector;
 
 public:
     Size size_;
     Coordinates coordinates_;
     std::vector<Container> storedContainers_;
+
+    std::vector<Container>& GetContainers();
 
     Board(Size size, Coordinates coordinates);
 

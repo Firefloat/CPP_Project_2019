@@ -6,6 +6,8 @@ Board::Board(Size size, Coordinates coordinates) : size_(size), coordinates_(coo
 }
 
 std::vector<FreeSpace> Board::GetFreeSpace(const Container& container) {
+    std::lock_guard lock(protector);
+
     auto resultVector = std::vector<FreeSpace>{};
 
     // get coordinates of start and end of board
@@ -42,9 +44,23 @@ std::vector<FreeSpace> Board::GetFreeSpace(const Container& container) {
 }
 
 void Board::Store(Container container) {
-    // TODO: store container thread safe
+    std::lock_guard lock(protector);
+    for (auto it = storedContainers_.begin(); it < storedContainers_.end(); it++){
+        // insert after
+        if (container.coordinates_.z_ > it->coordinates_.z_){
+            storedContainers_.insert(it+1, container);
+            break;
+        }
+    }
 }
 
 Container Board::Remove(Coordinates coordinates) {
-    // TODO: remove container thread safe
+    std::lock_guard lock(protector);
+    // find container
+    auto found = std::find(storedContainers_.begin(), storedContainers_.end(), coordinates);
+    // copy container to remove into variable
+    Container containerToRemove = *found;
+    // delete container in vector
+    storedContainers_.erase(found);
+    return containerToRemove;
 }
