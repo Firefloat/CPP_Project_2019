@@ -68,8 +68,8 @@ double Robo::GetMovingTime(Coordinates targetCoordinates) {
     return totalTime;
 }
 
-void Robo::AddToActionQueue(FunctionType functionType, Coordinates coordinates) {
-    actionQueue_.push(std::make_pair(functionType, coordinates));
+void Robo::AddToActionQueue(FunctionType functionType, Container container) {
+    actionQueue_.push(std::make_pair(functionType, container));
 }
 
 void Robo::Do() {
@@ -88,22 +88,39 @@ void Robo::Do() {
 }
 
 
-bool Robo::Store(Coordinates coordinates) {
-    // TODO Storing - Remove from Queue
-
-    std::this_thread::sleep_for(std::chrono::duration<double>(GetMovingTime(inputCoordinates_)));
-    std::this_thread::sleep_for(std::chrono::duration<double>(timeStoreRestore_));
-    std::this_thread::sleep_for(std::chrono::duration<double>(GetMovingTime(coordinates)));
-    std::this_thread::sleep_for(std::chrono::duration<double>(timeStoreRestore_));
-    return true;
+bool Robo::Store(Container container) {
+    try {
+        if (coordinates_.x_ < container.coordinates_.x_) {
+            leftShelf_.Store(container);
+        } else {
+            rightShelf_.Store(container);
+        }
+        std::this_thread::sleep_for(std::chrono::duration<double>(GetMovingTime(inputCoordinates_)));
+        std::this_thread::sleep_for(std::chrono::duration<double>(timeStoreRestore_));
+        std::this_thread::sleep_for(std::chrono::duration<double>(GetMovingTime(container.coordinates_)));
+        std::this_thread::sleep_for(std::chrono::duration<double>(timeStoreRestore_));
+        return true;
+    }
+    catch(...) {
+        return false;
+    }
 }
 
-bool Robo::Remove(Coordinates coordinates) {
-    // TODO Remove from Shelf
-    std::this_thread::sleep_for(std::chrono::duration<double>(GetMovingTime(coordinates)));
-    std::this_thread::sleep_for(std::chrono::duration<double>(timeStoreRestore_));
-    std::this_thread::sleep_for(std::chrono::duration<double>(GetMovingTime(outputCoordinates_)));
-    std::this_thread::sleep_for(std::chrono::duration<double>(timeStoreRestore_));
-    return true;
+bool Robo::Remove(Container container) {
+    try {
+        if (coordinates_.x_ < container.coordinates_.x_) {
+            leftShelf_.Remove(container.coordinates_);
+        } else {
+            rightShelf_.Remove(container.coordinates_);
+        }
+        std::this_thread::sleep_for(std::chrono::duration<double>(GetMovingTime(container.coordinates_)));
+        std::this_thread::sleep_for(std::chrono::duration<double>(timeStoreRestore_));
+        std::this_thread::sleep_for(std::chrono::duration<double>(GetMovingTime(outputCoordinates_)));
+        std::this_thread::sleep_for(std::chrono::duration<double>(timeStoreRestore_));
+        return true;
+    }
+    catch(...){
+        return false;
+    }
 }
 

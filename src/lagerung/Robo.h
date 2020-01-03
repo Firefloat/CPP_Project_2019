@@ -32,14 +32,14 @@ public:
     Queue queue_;
     Shelf leftShelf_;
     Shelf rightShelf_;
-    std::queue<std::pair<FunctionType , Coordinates>> actionQueue_;
+    std::queue<std::pair<FunctionType , Container>> actionQueue_;
     // TODO: Actionqueue
     Robo(Coordinates coordinates, Coordinates inputCoordinates, Coordinates outputCoordinates);
     double GetMovingTime(Coordinates targetCoordinates);
-    void AddToActionQueue(FunctionType functionType, Coordinates coordinates);
+    void AddToActionQueue(FunctionType functionType, Container container);
     void Do();
-    bool Store(Coordinates coordinates);
-    bool Remove(Coordinates coordinates);
+    bool Store(Container container);
+    bool Remove(Container container);
 };
 
 
