@@ -15,6 +15,7 @@ public:
     Article(ArticleType type, Priority priority, unsigned int quantity) : type_(type), priority_(priority), quantity_(quantity) {
 
     }
+    Article(){};
 
 };
 
