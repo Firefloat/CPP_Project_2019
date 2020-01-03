@@ -5,6 +5,12 @@ Board::Board(Size size, Coordinates coordinates) : size_(size), coordinates_(coo
     storedContainers_.reserve((int)(size_.width_ / containerSize));
 }
 
+Board::Board(const Board &other) : storedContainers_{other.storedContainers_}{
+    std::lock_guard<std::mutex> lock_other(const_cast<std::mutex&>(other.protector));
+    size_ = other.size_;
+    coordinates_ = other.coordinates_;
+}
+
 std::vector<FreeSpace> Board::GetFreeSpace(const Container& container) {
     std::lock_guard lock(protector);
 
