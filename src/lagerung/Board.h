@@ -18,6 +18,8 @@ public:
     Coordinates coordinates_;
     std::vector<Container> storedContainers_;
 
+    std::vector<Container>& GetContainers();
+
     Board(Size size, Coordinates coordinates);
     Board(const Board &other);
 
