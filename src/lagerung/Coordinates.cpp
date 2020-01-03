@@ -11,3 +11,7 @@ std::ostream& operator << (std::ostream& ostream, Coordinates coordinates){
 
     return ostream;
 }
+
+bool Coordinates::operator==(const Coordinates &coordinates) {
+    return x_ == coordinates.x_ && y_ == coordinates.y_ && z_ == coordinates.z_;
+}

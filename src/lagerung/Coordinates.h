@@ -25,6 +25,7 @@ public:
     }
 
     friend std::ostream& operator << (std::ostream& ostream, Coordinates coordinates);
+    bool operator==(const Coordinates &coordinates);
 
 };
 
