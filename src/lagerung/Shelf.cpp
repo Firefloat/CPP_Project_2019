@@ -69,5 +69,10 @@ Container Shelf::Remove(Coordinates coordinates) {
 }
 
 void Shelf::Store(Container container) {
-
+    for (auto &board : boards_){
+        if (board.coordinates_.y_ == container.coordinates_.y_){
+            board.Store(container);
+            break;
+        }
+    }
 }
