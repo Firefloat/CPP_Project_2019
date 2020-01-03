@@ -56,11 +56,16 @@ void Board::Store(Container container) {
 
 Container Board::Remove(Coordinates coordinates) {
     std::lock_guard lock(protector);
+    Container containerToRemove{};
     // find container
-    auto found = std::find(storedContainers_.begin(), storedContainers_.end(), coordinates);
-    // copy container to remove into variable
-    Container containerToRemove = *found;
-    // delete container in vector
-    storedContainers_.erase(found);
+    for (auto found = storedContainers_.begin(); found < storedContainers_.end(); found++){
+        if (found->coordinates_ == coordinates){
+            // copy container to remove into variable
+            containerToRemove = *found;
+            // delete container in vector
+            storedContainers_.erase(found);
+            break;
+        }
+    }
     return containerToRemove;
 }
