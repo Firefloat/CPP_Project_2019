@@ -73,14 +73,13 @@ void Robo::AddToActionQueue(FunctionType functionType, Container container) {
 }
 
 void Robo::Do() {
-
+    // TODO: use thread for detach?
     auto action = actionQueue_.front();
     std::future<bool> doAction;
     switch (action.first) {
         case FunctionStore:
             doAction = std::async(&Robo::Store, this, action.second);
             break;
-
         case FunctionRemove:
             doAction = std::async(&Robo::Remove, this, action.second);
             break;
