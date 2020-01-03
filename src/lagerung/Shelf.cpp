@@ -69,6 +69,7 @@ Container Shelf::Remove(Coordinates coordinates) {
 }
 
 void Shelf::Store(Container container) {
+    std::cout << "Store Container in Shelf at y = " << coordinates_.x_ << "\n";
     for (auto &board : boards_){
         if (board.coordinates_.y_ == container.coordinates_.y_){
             board.Store(container);

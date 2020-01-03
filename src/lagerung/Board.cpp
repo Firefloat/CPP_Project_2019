@@ -51,6 +51,7 @@ std::vector<FreeSpace> Board::GetFreeSpace(const Container& container) {
 }
 
 void Board::Store(Container container) {
+    std::cout << "Store Container in Board at z = " << coordinates_.z_ << "\n";
     std::lock_guard lock(protector);
     for (auto it = storedContainers_.begin(); it < storedContainers_.end(); it++){
         // insert after
