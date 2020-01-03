@@ -32,6 +32,7 @@ std::vector<FreeSpace> Board::GetFreeSpace(const Container& container) {
             auto end = containerLoop.coordinates_.z_ + 0.5*containerLoop.size_.width_;
 
             // if container is at start of shelf or at the end of another container
+            // TODO: creates error if only one container is present
             if (start == tempCoordsPrev.z_){
                 tempCoordsPrev.z_ = end;
                 continue;
