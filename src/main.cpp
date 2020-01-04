@@ -15,14 +15,13 @@ int main() {
         Container testContainer{Size{ 0.6, 0.6, 0.6},
                                 Article{ArticleType::muttern, Priority::high, 4}};
 
-        auto bestCoords = storageManager.FindOptimalSpace(testContainer);
-        std::cout << "Best coords found: \n" << bestCoords << "\n\n";
+        storageManager.AddToQueue(testContainer);
+        
         // find best place with async search
 //        auto getBestCoords = std::async(std::launch::async, &StorageManager::FindOptimalSpace, std::ref(storageManager),
 //                                        std::ref(testContainer));
 //        auto bestCoords = getBestCoords.get();
-        testContainer.coordinates_ = bestCoords;
-        storageManager.FindRoboByContainerXCoord(bestCoords.x_).Store(testContainer);
+
 //        auto thread = std::thread{&Robo::Store, &storageManager.FindRoboByContainerXCoord(bestCoords.x_), testContainer};
 //        thread.detach();
     }

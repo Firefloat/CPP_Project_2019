@@ -77,8 +77,11 @@ Robo& StorageManager::FindRoboByContainerXCoord(double xCoord) {
 
 void StorageManager::AddToQueue(const Container &container) {
     // find best place to store container
-    auto bestPlace = FindOptimalSpace(container);
+    auto bestPlace = this->FindOptimalSpace(container);
+    std::cout << "Best coords found: \n" << bestPlace << " --------------------------- \n\n"; // TODO: debug only
+
+    container.coordinates_ = bestPlace;
+
     // find robo corrisponding to x-coord of best place
-    auto roboToStore = FindRoboByContainerXCoord(bestPlace.x_);
-    // TODO: store to robo
+    this->FindRoboByContainerXCoord(bestPlace.x_).Store(container);
 }
