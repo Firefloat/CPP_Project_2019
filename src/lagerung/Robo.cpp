@@ -90,7 +90,7 @@ void Robo::Do() {
 bool Robo::Store(Container container) {
     std::cout << "Store Container in Robo at x = " << coordinates_.x_ << "\n";
     try {
-        if (coordinates_.x_ < container.coordinates_.x_) {
+        if (coordinates_.x_ > container.coordinates_.x_) {
             leftShelf_.Store(container);
         } else {
             rightShelf_.Store(container);

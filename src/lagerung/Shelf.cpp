@@ -36,7 +36,7 @@ std::tuple<Coordinates, double> Shelf::GetFreeSpace(const Container& container){
     double optimalPosition{container.GetPrioPos()};
 
     for (auto &board : boards_){
-        for (auto freeSpace : board.GetFreeSpace(container)){
+        for (auto &freeSpace : board.GetFreeSpace(container)){
             // TODO: get vector by reference
             double freeSpaceXCoord{freeSpace.previous_.z_ + (freeSpace.next_.z_ - freeSpace.previous_.z_)/2};
             double absDistancePrevious{std::abs(optimalPosition - freeSpace.previous_.z_)};
@@ -69,10 +69,11 @@ Container Shelf::Remove(Coordinates coordinates) {
 }
 
 void Shelf::Store(Container container) {
-    std::cout << "Store Container in Shelf at y = " << coordinates_.x_ << "\n";
+    double epsilon = 0.01f;
     for (auto &board : boards_){
-        if (board.coordinates_.y_ == container.coordinates_.y_){
+        if (std::fabs(board.coordinates_.y_ - container.coordinates_.y_) < epsilon){
             board.Store(container);
+            std::cout << "Store Container in Shelf at x = " << coordinates_.x_ << "\n";
             break;
         }
     }
