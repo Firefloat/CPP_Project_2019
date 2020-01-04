@@ -7,6 +7,7 @@
 #include "Coordinates.h"
 #include "FreeSpace.h"
 #include "Container.h"
+#include <mutex>
 
 class Board {
 

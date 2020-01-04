@@ -29,7 +29,7 @@ std::tuple<Coordinates, double> Shelf::GetFreeSpace(const Container& container){
 
     Coordinates bestCoords;
     // set difference to max value
-    double smallestDifference{MAXFLOAT};
+    double smallestDifference{FLT_MAX};
     // retrieve container gap
     double containerGap = Loaderton::Instance().getJsonData()["container"]["gap"];
     // get optimal position for container
@@ -66,6 +66,7 @@ std::tuple<Coordinates, double> Shelf::GetFreeSpace(const Container& container){
 
 Container Shelf::Remove(Coordinates coordinates) {
     // TODO
+    return Container(size_, Article(muttern,high,2));
 }
 
 void Shelf::Store(Container container) {

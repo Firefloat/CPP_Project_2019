@@ -31,7 +31,7 @@ Coordinates StorageManager::FindOptimalSpace(const Container& container) {
 
     auto getFreeSpaceFromShelfs = [&](Shelf shelf) { return shelf.GetFreeSpace(container); };
     std::tuple<Coordinates, int> resultTuple;
-    double smallestDifference{MAXFLOAT};
+    double smallestDifference{FLT_MAX};
     Coordinates bestCoords{};
 
     for (const auto& robo : robots_){
@@ -86,5 +86,6 @@ void StorageManager::AddToQueue(const Container &container) {
 
     // find robo corrisponding to x-coord of best place
     // TODO: robo store multithreading
-    this->FindRoboByContainerXCoord(bestPlace.x_).Store(container);
+
+    this->FindRoboByContainerXCoord(bestPlace.x_).AddToActionQueue(FunctionStore, container);
 }

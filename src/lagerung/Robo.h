@@ -26,6 +26,7 @@ public:
     float horizontalAcceleration_;
     float horizontalVelocity_;
     float timeStoreRestore_;
+    float speedMultiplier_;
     Coordinates coordinates_;
     Coordinates inputCoordinates_;
     Coordinates outputCoordinates_;
@@ -33,10 +34,12 @@ public:
     Shelf leftShelf_;
     Shelf rightShelf_;
     std::queue<std::pair<FunctionType , Container>> actionQueue_;
+    std::thread thread_;
     // TODO: Actionqueue
     Robo(Coordinates coordinates, Coordinates inputCoordinates, Coordinates outputCoordinates);
     double GetMovingTime(Coordinates targetCoordinates);
     void AddToActionQueue(FunctionType functionType, Container container);
+    void CheckActionQueue();
     void Do();
     bool Store(Container container);
     bool Remove(Container container);

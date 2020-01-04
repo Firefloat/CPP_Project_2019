@@ -6,6 +6,9 @@ Robo::Robo(Coordinates coordinates, Coordinates inputCoordinates, Coordinates ou
     horizontalAcceleration_ = Loaderton::Instance().getJsonData()["robo"]["horizontal_acceleration"];
     horizontalVelocity_ = Loaderton::Instance().getJsonData()["robo"]["horizontal_velocity"];
     timeStoreRestore_ = Loaderton::Instance().getJsonData()["robo"]["time_store_restore"];
+    speedMultiplier_ = Loaderton::Instance().getJsonData()["speed_multiplier"];
+    speedMultiplier_ = speedMultiplier_ <= 0 ? 1e-9 : speedMultiplier_; // Zero and negative numbers not allowed (dividing)!
+
 
     double xLeft, xRight, yShelf, zShelf;
 
@@ -69,7 +72,22 @@ double Robo::GetMovingTime(Coordinates targetCoordinates) {
 }
 
 void Robo::AddToActionQueue(FunctionType functionType, Container container) {
-    actionQueue_.push(std::make_pair(functionType, container));
+    std::cout << "Here" << std::endl;
+    auto p1 = std::make_pair(functionType, container);
+    std::cout << "Here" << std::endl;
+    //actionQueue_.push(std::make_pair(functionType, container)); // <-- Hier Micha
+    std::cout << thread_.joinable() << std::endl;
+    if (!(thread_.joinable())){
+        thread_ = std::thread(&Robo::CheckActionQueue, this);
+    }
+}
+
+void Robo::CheckActionQueue() {
+    if(actionQueue_.empty() && thread_.joinable()){
+        std::terminate();
+    } else{
+        Do();
+    }
 }
 
 void Robo::Do() {
@@ -84,6 +102,10 @@ void Robo::Do() {
             doAction = std::async(&Robo::Remove, this, action.second);
             break;
     }
+    if(doAction.get()){
+        actionQueue_.pop();
+        CheckActionQueue();
+    }
 }
 
 
@@ -95,10 +117,10 @@ bool Robo::Store(Container container) {
         } else {
             rightShelf_.Store(container);
         }
-        std::this_thread::sleep_for(std::chrono::duration<double>(GetMovingTime(inputCoordinates_)));
-        std::this_thread::sleep_for(std::chrono::duration<double>(timeStoreRestore_));
-        std::this_thread::sleep_for(std::chrono::duration<double>(GetMovingTime(container.coordinates_)));
-        std::this_thread::sleep_for(std::chrono::duration<double>(timeStoreRestore_));
+        std::this_thread::sleep_for(std::chrono::duration<double>(GetMovingTime(inputCoordinates_)/speedMultiplier_));
+        std::this_thread::sleep_for(std::chrono::duration<double>(timeStoreRestore_/speedMultiplier_));
+        std::this_thread::sleep_for(std::chrono::duration<double>(GetMovingTime(container.coordinates_)/speedMultiplier_));
+        std::this_thread::sleep_for(std::chrono::duration<double>(timeStoreRestore_/speedMultiplier_));
         return true;
     }
     catch(...) {
@@ -113,10 +135,10 @@ bool Robo::Remove(Container container) {
         } else {
             rightShelf_.Remove(container.coordinates_);
         }
-        std::this_thread::sleep_for(std::chrono::duration<double>(GetMovingTime(container.coordinates_)));
-        std::this_thread::sleep_for(std::chrono::duration<double>(timeStoreRestore_));
-        std::this_thread::sleep_for(std::chrono::duration<double>(GetMovingTime(outputCoordinates_)));
-        std::this_thread::sleep_for(std::chrono::duration<double>(timeStoreRestore_));
+        std::this_thread::sleep_for(std::chrono::duration<double>(GetMovingTime(container.coordinates_)/speedMultiplier_));
+        std::this_thread::sleep_for(std::chrono::duration<double>(timeStoreRestore_/speedMultiplier_));
+        std::this_thread::sleep_for(std::chrono::duration<double>(GetMovingTime(outputCoordinates_)/speedMultiplier_));
+        std::this_thread::sleep_for(std::chrono::duration<double>(timeStoreRestore_/speedMultiplier_));
         return true;
     }
     catch(...){
