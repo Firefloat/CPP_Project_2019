@@ -23,7 +23,8 @@ StorageManager::StorageManager() {
 }
 
 void StorageManager::RemoveFromStorage(ArticleType articleType, int amount) {
-    // TODO: remove item from storage
+
+    
 }
 
 Coordinates StorageManager::FindOptimalSpace(const Container& container) {
@@ -78,10 +79,12 @@ Robo& StorageManager::FindRoboByContainerXCoord(double xCoord) {
 void StorageManager::AddToQueue(const Container &container) {
     // find best place to store container
     auto bestPlace = this->FindOptimalSpace(container);
+
     std::cout << "Best coords found: \n" << bestPlace << " --------------------------- \n\n"; // TODO: debug only
 
     container.coordinates_ = bestPlace;
 
     // find robo corrisponding to x-coord of best place
+    // TODO: robo store multithreading
     this->FindRoboByContainerXCoord(bestPlace.x_).Store(container);
 }
