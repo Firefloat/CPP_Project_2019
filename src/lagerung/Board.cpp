@@ -22,7 +22,7 @@ std::vector<FreeSpace> Board::GetFreeSpace(const Container& container) {
     Coordinates tempCoordsPrev{coordinates_.x_, coordinates_.y_, coordinates_.z_-0.5*size_.width_};
     Coordinates tempCoordsNext{coordinates_.x_, coordinates_.y_, coordinates_.z_+0.5*size_.width_};
 
-    std::lock_guard lock(protector);
+    std::lock_guard<std::mutex> lock(protector);
     // if no container is stored, return whole board as empty
     if (storedContainers_.empty()){
         resultVector.emplace_back(tempCoordsPrev, tempCoordsNext);
@@ -58,7 +58,7 @@ std::vector<FreeSpace> Board::GetFreeSpace(const Container& container) {
 
 void Board::Store(Container container) {
     std::cout << "Store Container in Board at y = " << coordinates_.y_ << "\n";
-    std::lock_guard lock(protector);
+    std::lock_guard<std::mutex> lock(protector);
 
     for (auto it = storedContainers_.begin(); it < storedContainers_.end(); it++){
         // insert after
@@ -74,7 +74,7 @@ void Board::Store(Container container) {
 }
 
 Container Board::Remove(Coordinates coordinates) {
-    std::lock_guard lock(protector);
+    std::lock_guard<std::mutex> lock(protector);
     Container containerToRemove{};
     // find container
     for (auto found = storedContainers_.begin(); found < storedContainers_.end(); found++){
