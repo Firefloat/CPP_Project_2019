@@ -24,7 +24,7 @@ StorageManager::StorageManager() {
 
 void StorageManager::RemoveFromStorage(ArticleType articleType, int amount) {
 
-    
+
 }
 
 Coordinates StorageManager::FindOptimalSpace(const Container& container) {
