@@ -1,13 +1,10 @@
 
 
-Package ID: 140732697995392 with Article Type: 1 and amount:  23234 will be stored at: 
+Package ID: 140732917516416 with Article Type: 0 and amount:  1 will be stored at: 
 X-Coord: 5.4
 Y-Coord: 0.375
-Z-Coord: 80
+Z-Coord: 159.55
 
- --------------------------- 
+ --------------------------- Sun Jan  5 16:25:17 2020
 
-Container: ID: 140732697994552 with Article Type: 1 and amount:  23234 to be removed! 
-
-Container: ID: 140732697994552 with Article Type: 1 and amount:  23234 to be removed! 
 

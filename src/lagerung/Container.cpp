@@ -9,7 +9,6 @@ float Container::GetPrioPos() const {
 }
 
 std::ostream& operator << (std::ostream& os, const Container& container){
-
     os << "ID: " << (size_t)&container << " with Article Type: " << container.article_.type_ << " and amount:  "
     << container.article_.quantity_;
 

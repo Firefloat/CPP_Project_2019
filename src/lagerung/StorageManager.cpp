@@ -116,8 +116,9 @@ void StorageManager::AddToQueue(Container &container) {
     // find best place to store container
     auto bestPlace = this->FindOptimalSpace(container);
 
-    std::cout << "\n\nPackage " << container << " will be stored at: \n" << bestPlace << " --------------------------- \n\n";
-    Loaderton::Instance().LogFile << "\n\nPackage " << container << " will be stored at: \n" << bestPlace << " --------------------------- \n\n";
+    auto timeNow = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+    std::cout << "\n\nPackage " << container << " will be stored at: \n" << bestPlace << " ---------------------------  " << std::ctime(&timeNow) << "\n\n";
+    Loaderton::Instance().LogFile << "\n\nPackage " << container << " will be stored at: \n" << bestPlace << " --------------------------- " << std::ctime(&timeNow) << "\n\n";
 
     container.coordinates_ = bestPlace;
 
