@@ -97,7 +97,6 @@ void Robo::Do() {
     switch (action.first) {
         case FunctionStore:
             doAction = std::async(&Robo::Store, this, action.second);
-            queueLength -= action.second.size_.width_;
             break;
         case FunctionRemove:
             doAction = std::async(&Robo::Remove, this, action.second);
@@ -115,6 +114,7 @@ bool Robo::Store(Container container) {
     std::cout << "Store Container in Robo at x = " << coordinates_.x_ << "\n";
     try {
         container.isStored = true;
+        queueLength -= container.size_.width_;
         if (coordinates_.x_ > container.coordinates_.x_) {
             leftShelf_.Store(container);
         } else {

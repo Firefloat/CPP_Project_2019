@@ -9,12 +9,13 @@ std::mt19937 eng{rd};
 std::uniform_int_distribution<> intDist{0, 3};
 std::uniform_int_distribution<> quantityDist{0, 100};
 std::uniform_int_distribution<> storeOrRemove{0, 1};
+std::uniform_int_distribution<> container{0, 1};
 // --------------------------------------------------------
 
 Container GenerateContainer(){
 
     Container tempContainer{Size{0.6, 0.6, 0.6},
-                            Article{static_cast<ArticleType>(storeOrRemove(eng)), static_cast<Priority>(intDist(eng)),
+                            Article{static_cast<ArticleType>(container(eng)), static_cast<Priority>(intDist(eng)),
                                     static_cast<unsigned int>(quantityDist(eng))}};
 
     return tempContainer;
