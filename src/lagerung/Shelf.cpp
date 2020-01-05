@@ -65,8 +65,15 @@ std::tuple<Coordinates, double> Shelf::GetFreeSpace(const Container& container){
 }
 
 Container Shelf::Remove(Coordinates coordinates) {
-    // TODO
-    return Container(size_, Article(muttern,high,2));
+    double epsilon = 0.01f;
+    Container container;
+    for (auto &board : boards_){
+        if (std::fabs(board.coordinates_.y_ - coordinates_.y_) < epsilon){
+            container = board.Remove(coordinates);
+            break;
+        }
+    }
+    return container;
 }
 
 void Shelf::Store(Container &container) {

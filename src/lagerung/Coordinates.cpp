@@ -13,5 +13,7 @@ std::ostream& operator << (std::ostream& ostream, Coordinates coordinates){
 }
 
 bool Coordinates::operator==(const Coordinates &coordinates) {
-    return x_ == coordinates.x_ && y_ == coordinates.y_ && z_ == coordinates.z_;
+    double epsilon = 0.01f;
+
+    return (std::fabs(x_ - coordinates.x_) <= epsilon) && (std::fabs(y_ - coordinates.y_) <= epsilon) && (std::fabs(z_ - coordinates.z_) <= epsilon);
 }

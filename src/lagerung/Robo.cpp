@@ -114,6 +114,7 @@ bool Robo::Store(Container container) {
     // TODO: pass per reference
     std::cout << "Store Container in Robo at x = " << coordinates_.x_ << "\n";
     try {
+        container.isStored = true;
         if (coordinates_.x_ > container.coordinates_.x_) {
             leftShelf_.Store(container);
         } else {
@@ -123,7 +124,6 @@ bool Robo::Store(Container container) {
         std::this_thread::sleep_for(std::chrono::duration<double>(timeStoreRestore_/speedMultiplier_));
         std::this_thread::sleep_for(std::chrono::duration<double>(GetMovingTime(container.coordinates_)/speedMultiplier_));
         std::this_thread::sleep_for(std::chrono::duration<double>(timeStoreRestore_/speedMultiplier_));
-        container.isStored = true;
         return true;
     }
     catch(...) {

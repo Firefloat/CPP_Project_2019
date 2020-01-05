@@ -2,6 +2,7 @@
 #define SRC_COORDINATES_H
 
 #include <iostream>
+#include <cmath>
 
 struct Coordinates {
 

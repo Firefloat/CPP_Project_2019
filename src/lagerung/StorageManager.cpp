@@ -24,7 +24,37 @@ StorageManager::StorageManager() {
 
 void StorageManager::RemoveFromStorage(ArticleType articleType, int amount) {
 
+    Container resultContainer{};
 
+    for (auto& robo : robots_){
+        // left shelf
+        for(auto& board : robo.leftShelf_.boards_){
+            for(auto& container : board.storedContainers_){
+                if(container.isStored){
+                    if(container.article_.type_ == articleType && container.article_.quantity_ >= amount){
+                        resultContainer = container;
+                    }
+                }
+            }
+        }
+        // right shelf
+        for(auto& board : robo.rightShelf_.boards_){
+            for(auto& container : board.storedContainers_){
+                if(container.isStored){
+                    if(container.article_.type_ == articleType && container.article_.quantity_ >= amount){
+                        resultContainer = container;
+                    }
+                }
+            }
+        }
+    }
+    if (resultContainer.coordinates_.x_ == 0){
+        std::cout << "No matching article found! \n\n";
+    }
+    else{
+        std::cout << "Container: " << resultContainer << " to be removed! \n\n";
+        this->FindRoboByContainerXCoord(resultContainer.coordinates_.x_).AddToActionQueue(FunctionRemove, resultContainer);
+    }
 }
 
 Coordinates StorageManager::FindOptimalSpace(const Container& container) {

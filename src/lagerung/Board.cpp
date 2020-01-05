@@ -87,6 +87,7 @@ Container Board::Remove(Coordinates coordinates) {
             containerToRemove = *found;
             // delete container in vector
             storedContainers_.erase(found);
+            std::cout << "Container: " << containerToRemove << " removed! \n\n";
             break;
         }
     }
