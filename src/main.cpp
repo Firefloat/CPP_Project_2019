@@ -16,7 +16,7 @@ Container GenerateContainer(){
     Container tempContainer{Size{0.6, 0.6, 0.6},
                             Article{static_cast<ArticleType>(storeOrRemove(eng)), static_cast<Priority>(intDist(eng)),
                                     static_cast<unsigned int>(quantityDist(eng))}};
-    
+
     return tempContainer;
 }
 
@@ -169,13 +169,16 @@ void UserInteraction(StorageManager& storageManager){
 
 void Simulation(StorageManager& storageManager){
     bool notFinished = true;
+    double speedMultiplier = Loaderton::Instance().getJsonData()["speed_multiplier"];
+    speedMultiplier = speedMultiplier <= 0 ? 1e-9 : speedMultiplier; // Zero and negative numbers not allowed (dividing)!
+
     while(notFinished){
 
-        std::this_thread::sleep_for(std::chrono::seconds(3));
+        std::this_thread::sleep_for(std::chrono::duration<double>(3/speedMultiplier));
 
         // initialize test container
         Container testContainer = GenerateContainer();
-        if(storeOrRemove(eng)){
+        if(!storeOrRemove(eng)){
             storageManager.AddToQueue(testContainer);
         }
         else{
