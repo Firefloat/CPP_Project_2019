@@ -14,9 +14,9 @@ class StorageManager {
 private:
     int shelfAmount_;
     float conveyorBeltLength_, shelfDepth_, shelfGap_, shelfHeight_;
+
 public:
     std::vector<Robo> robots_;
-    std::queue<Container> toStore;
     StorageManager();
     Coordinates FindOptimalSpace(const Container& container);
     void AddToQueue(const Container &container);
