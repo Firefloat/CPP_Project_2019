@@ -1,0 +1,47 @@
+
+
+
+
+Package ID: 140732786805104 with Article Type: 0 and amount:  92 will be stored at: 
+X-Coord: 5.4
+Y-Coord: 0.375
+Z-Coord: 0.45
+
+ --------------------------- 
+
+
+
+Package ID: 140732786805104 with Article Type: 0 and amount:  60 will be stored at: 
+X-Coord: 9
+Y-Coord: 0.375
+Z-Coord: 0.45
+
+ --------------------------- 
+
+
+
+Package ID: 140732786805104 with Article Type: 0 and amount:  82 will be stored at: 
+X-Coord: 12.6
+Y-Coord: 0.375
+Z-Coord: 80
+
+ --------------------------- 
+
+
+
+Package ID: 140732786805104 with Article Type: 0 and amount:  87 will be stored at: 
+X-Coord: 16.2
+Y-Coord: 0.375
+Z-Coord: 159.55
+
+ --------------------------- 
+
+
+
+Package ID: 140732786805104 with Article Type: 1 and amount:  23 will be stored at: 
+X-Coord: 19.8
+Y-Coord: 0.375
+Z-Coord: 0.45
+
+ --------------------------- 
+

@@ -36,7 +36,6 @@ void UserInteraction(StorageManager& storageManager){
     sizeC3.width_ = (double) Loaderton::Instance().getJsonData()["container"]["width_c3"];
     sizeC3.height_ = (double) Loaderton::Instance().getJsonData()["container"]["height"];
     sizeC3.depth_ = (double) Loaderton::Instance().getJsonData()["container"]["depth"];
-
     bool notFinished = true;
     while(notFinished){
 
@@ -171,9 +170,15 @@ void Simulation(StorageManager& storageManager){
     bool notFinished = true;
     double speedMultiplier = Loaderton::Instance().getJsonData()["speed_multiplier"];
     speedMultiplier = speedMultiplier <= 0 ? 1e-9 : speedMultiplier; // Zero and negative numbers not allowed (dividing)!
+    int counter{0};
 
+    std::cout << "How many iterations would you like to simulate?";
+    std::cin >> counter;
     while(notFinished){
-
+        counter--;
+        if (counter == 0){
+            notFinished = false;
+        }
         std::this_thread::sleep_for(std::chrono::duration<double>(3/speedMultiplier));
 
         // initialize test container
@@ -188,6 +193,7 @@ void Simulation(StorageManager& storageManager){
 }
 
 int main() {
+
     Loaderton::Instance().Setup();
 
     // create storage manager
@@ -203,12 +209,18 @@ int main() {
     if (c == 's' || c == 'S'){
         Simulation(storageManager);
     }
-    if (c == 'i' || c == 'I'){
+    else if (c == 'i' || c == 'I'){
         UserInteraction(storageManager);
     }
     else{
         std::cout << "Wrong character abort!!!!!!";
         exit(13);
+    }
+
+    for (auto& robo : storageManager.robots_){
+        if(robo.thread_.joinable()){
+            robo.thread_.detach();
+        }
     }
 
     Loaderton::Instance().Save();
