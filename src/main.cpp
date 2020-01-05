@@ -47,7 +47,7 @@ void UserInteraction(StorageManager& storageManager){
         Article article{};
         char removeOrStore;
 
-        std::cout << "To remove press 'r' and to store press 's'";
+        std::cout << "To remove press 'r', to store press 's' and to exit press 'e'";
         std::cin >> removeOrStore;
 
         if (removeOrStore == 's' || removeOrStore == 'S'){
@@ -156,6 +156,9 @@ void UserInteraction(StorageManager& storageManager){
                 }
             }
             storageManager.RemoveFromStorage(article.type_, article.quantity_);
+        }
+        else if (removeOrStore == 'e' || removeOrStore == 'E'){
+            notFinished = false;
         }
         else{
             std::cout << "ABORT!";

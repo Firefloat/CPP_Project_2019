@@ -134,6 +134,7 @@ bool Robo::Store(Container container) {
 bool Robo::Remove(Container container) {
     // TODO: pass per reference
     try {
+        container.isStored = false;
         if (coordinates_.x_ < container.coordinates_.x_) {
             leftShelf_.Remove(container.coordinates_);
         } else {
