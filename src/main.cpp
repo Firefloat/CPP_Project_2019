@@ -20,13 +20,12 @@ Container GenerateContainer(){
 int main() {
     Loaderton::Instance().Setup();
 
-    std::cout << intDist(eng) << "\n\n\n";
     // create storage manager
     StorageManager storageManager{};
     bool notFinished = true;
 
     while(notFinished){
-        std::this_thread::sleep_for(std::chrono::seconds(2));
+        std::this_thread::sleep_for(std::chrono::seconds(5));
 
         // initialize test container
         Container testContainer = GenerateContainer();

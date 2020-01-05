@@ -31,7 +31,7 @@ Coordinates StorageManager::FindOptimalSpace(const Container& container) {
 
     auto getFreeSpaceFromShelfs = [&](Shelf shelf) { return shelf.GetFreeSpace(container); };
     std::tuple<Coordinates, int> resultTuple;
-    double smallestDifference{MAXFLOAT};
+    double smallestDifference{FLT_MAX};
     Coordinates bestCoords{};
 
     for (const auto& robo : robots_){
@@ -80,7 +80,7 @@ void StorageManager::AddToQueue(const Container &container) {
     // find best place to store container
     auto bestPlace = this->FindOptimalSpace(container);
 
-    std::cout << "Best coords found: \n" << bestPlace << " --------------------------- \n\n"; // TODO: debug only
+    std::cout << "\n\nPackage " << container << " will be stored at: \n" << bestPlace << " --------------------------- \n\n"; // TODO: debug only
 
     container.coordinates_ = bestPlace;
 
