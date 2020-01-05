@@ -61,6 +61,10 @@ void Board::Store(Container container) {
     std::lock_guard<std::mutex> lock(protector);
 
     for (auto it = storedContainers_.begin(); it < storedContainers_.end(); it++){
+        if (container.coordinates_.z_ == it->coordinates_.z_){
+            *it = container;
+            break;
+        }
         // insert after
         if (container.coordinates_.z_ > it->coordinates_.z_){
             storedContainers_.insert(it+1, container);

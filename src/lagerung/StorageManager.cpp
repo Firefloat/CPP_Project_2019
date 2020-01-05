@@ -91,5 +91,13 @@ void StorageManager::AddToQueue(const Container &container) {
     // find robo corrisponding to x-coord of best place
     // TODO: robo store multithreading
 
-    this->FindRoboByContainerXCoord(bestPlace.x_).AddToActionQueue(FunctionStore, container);
+
+    Robo &robo = this->FindRoboByContainerXCoord(bestPlace.x_);
+
+    if (robo.coordinates_.x_ > container.coordinates_.x_) {
+        robo.leftShelf_.Store(container);
+    } else {
+        robo.rightShelf_.Store(container);
+    }
+    robo.AddToActionQueue(FunctionStore, container);
 }
