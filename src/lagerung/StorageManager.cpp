@@ -31,7 +31,7 @@ Coordinates StorageManager::FindOptimalSpace(const Container& container) {
 
     auto getFreeSpaceFromShelfs = [&](Shelf shelf) { return shelf.GetFreeSpace(container); };
     std::tuple<Coordinates, int> resultTuple;
-    double smallestDifference{FLT_MAX};
+    double smallestDifference{MAXFLOAT};
     Coordinates bestCoords{};
 
     for (const auto& robo : robots_){
