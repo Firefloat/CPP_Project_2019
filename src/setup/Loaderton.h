@@ -6,6 +6,7 @@
 #define SRC_LOADERTON_H
 
 #include "../extern/json.hpp"
+#include <iostream>
 #include <fstream>
 #include <string>
 
@@ -17,10 +18,13 @@ private:
     std::string saveFileName_;
     json jsonData_;
     Loaderton() : setupFileName_("../data/setup.json"), saveFileName_("../data/save.json") {
-
+        LogFile.open("../data/protocol.txt", std::fstream::out | std::fstream::app);
     };
 
+    ~Loaderton();
+
 public:
+    std::fstream LogFile;
     void Setup();
     void Save();
     void Load();

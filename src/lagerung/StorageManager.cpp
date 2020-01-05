@@ -49,10 +49,12 @@ void StorageManager::RemoveFromStorage(ArticleType articleType, int amount) {
         }
     }
     if (resultContainer.coordinates_.x_ == 0){
-        std::cout << "No matching article found! \n\n";
+        std::cout << "No matching article found for : " << resultContainer << "\n\n";
+        Loaderton::Instance().LogFile << "No matching article found for : " << resultContainer << "\n\n";
     }
     else{
         std::cout << "Container: " << resultContainer << " to be removed! \n\n";
+        Loaderton::Instance().LogFile << "Container: " << resultContainer << " to be removed! \n\n";
         this->FindRoboByContainerXCoord(resultContainer.coordinates_.x_).AddToActionQueue(FunctionRemove, resultContainer);
     }
 }
@@ -114,7 +116,8 @@ void StorageManager::AddToQueue(Container &container) {
     // find best place to store container
     auto bestPlace = this->FindOptimalSpace(container);
 
-    std::cout << "\n\nPackage " << container << " will be stored at: \n" << bestPlace << " --------------------------- \n\n"; // TODO: debug only
+    std::cout << "\n\nPackage " << container << " will be stored at: \n" << bestPlace << " --------------------------- \n\n";
+    Loaderton::Instance().LogFile << "\n\nPackage " << container << " will be stored at: \n" << bestPlace << " --------------------------- \n\n";
 
     container.coordinates_ = bestPlace;
 

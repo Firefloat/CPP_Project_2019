@@ -10,6 +10,11 @@ void Loaderton::Load() {
     // TODO
 }
 
+Loaderton::~Loaderton(){
+    LogFile.flush();
+    LogFile.close();
+}
+
 void Loaderton::Save() {
     // TODO
     std::ofstream tempFile(saveFileName_);
