@@ -22,6 +22,7 @@ private:
 
 public:
     volatile bool isAvailable{true};
+    float queueLength;
     float verticalAcceleration_;
     float verticalVelocity_;
     float horizontalAcceleration_;

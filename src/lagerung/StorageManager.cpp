@@ -60,7 +60,7 @@ void StorageManager::RemoveFromStorage(ArticleType articleType, int amount) {
 }
 
 Coordinates StorageManager::FindOptimalSpace(const Container& container) {
-
+    float queueLength = Loaderton::Instance().getJsonData()["conveyor_belt"]["length_queue"];
     auto getFreeSpaceFromShelfs = [&](Shelf shelf) { return shelf.GetFreeSpace(container); };
     std::tuple<Coordinates, int> resultTuple;
     double smallestDifference{FLT_MAX};
@@ -68,25 +68,27 @@ Coordinates StorageManager::FindOptimalSpace(const Container& container) {
     int weight{1};
 
     for (const auto& robo : robots_){
-        if (robo.isAvailable){
-            weight = 0;
-        }
-        // retrieve tuple from left shelf
-        resultTuple = getFreeSpaceFromShelfs(robo.leftShelf_);
+        if (robo.queueLength + container.size_.width_ <= queueLength) {
+            if (robo.isAvailable) {
+                weight = 0;
+            }
+            // retrieve tuple from left shelf
+            resultTuple = getFreeSpaceFromShelfs(robo.leftShelf_);
 
-        // check if left shelf has best space, with smallest gap
-        if (std::get<1>(resultTuple) + weight < smallestDifference){
-            bestCoords = std::get<0>(resultTuple);
-            smallestDifference = std::get<1>(resultTuple) + weight;
-        }
+            // check if left shelf has best space, with smallest gap
+            if (std::get<1>(resultTuple) + weight < smallestDifference) {
+                bestCoords = std::get<0>(resultTuple);
+                smallestDifference = std::get<1>(resultTuple) + weight;
+            }
 
-        // retrieve tuple from right shelf
-        resultTuple = getFreeSpaceFromShelfs(robo.rightShelf_);
+            // retrieve tuple from right shelf
+            resultTuple = getFreeSpaceFromShelfs(robo.rightShelf_);
 
-        // check if right shelf has best space, with smallest gap
-        if (std::get<1>(resultTuple) + weight < smallestDifference){
-            bestCoords = std::get<0>(resultTuple);
-            smallestDifference = std::get<1>(resultTuple) + weight;
+            // check if right shelf has best space, with smallest gap
+            if (std::get<1>(resultTuple) + weight < smallestDifference) {
+                bestCoords = std::get<0>(resultTuple);
+                smallestDifference = std::get<1>(resultTuple) + weight;
+            }
         }
     }
     return bestCoords;
@@ -115,23 +117,29 @@ Robo& StorageManager::FindRoboByContainerXCoord(double xCoord) {
 void StorageManager::AddToQueue(Container &container) {
     // find best place to store container
     auto bestPlace = this->FindOptimalSpace(container);
-
-    auto timeNow = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-    std::cout << "\n\nPackage " << container << " will be stored at: \n" << bestPlace << " ---------------------------  " << std::ctime(&timeNow) << "\n\n";
-    Loaderton::Instance().LogFile << "\n\nPackage " << container << " will be stored at: \n" << bestPlace << " --------------------------- " << std::ctime(&timeNow) << "\n\n";
-
-    container.coordinates_ = bestPlace;
-
-    // find robo corrisponding to x-coord of best place
-    // TODO: robo store multithreading
-
-
-    Robo &robo = this->FindRoboByContainerXCoord(bestPlace.x_);
-
-    if (robo.coordinates_.x_ > container.coordinates_.x_) {
-        robo.leftShelf_.Store(container);
-    } else {
-        robo.rightShelf_.Store(container);
+    Container referenceContainer{};
+    if (bestPlace == referenceContainer.coordinates_){
+        std::cout << "\n\n-------------- No free queue available, please try again later--------------\n\n";
+        Loaderton::Instance().LogFile << "\n\n-------------- No free queue available, please try again later--------------\n\n";
     }
-    robo.AddToActionQueue(FunctionStore, container);
+    else{
+        auto timeNow = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+        std::cout << "\n\nPackage " << container << " will be stored at: \n" << bestPlace << " ---------------------------  " << std::ctime(&timeNow) << "\n\n";
+        Loaderton::Instance().LogFile << "\n\nPackage " << container << " will be stored at: \n" << bestPlace << " --------------------------- " << std::ctime(&timeNow) << "\n\n";
+
+        container.coordinates_ = bestPlace;
+
+        // find robo corrisponding to x-coord of best place
+        // TODO: robo store multithreading
+
+
+        Robo &robo = this->FindRoboByContainerXCoord(bestPlace.x_);
+
+        if (robo.coordinates_.x_ > container.coordinates_.x_) {
+            robo.leftShelf_.Store(container);
+        } else {
+            robo.rightShelf_.Store(container);
+        }
+        robo.AddToActionQueue(FunctionStore, container);
+    }
 }
