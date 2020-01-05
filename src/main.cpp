@@ -8,12 +8,13 @@ unsigned int rd{42};
 std::mt19937 eng{rd};
 std::uniform_int_distribution<> intDist{0, 3};
 std::uniform_int_distribution<> quantityDist{0, 100};
+std::uniform_int_distribution<> storeOrRemove{0, 1};
 // --------------------------------------------------------
 
 Container GenerateContainer(){
 
     Container tempContainer{Size{0.6, 0.6, 0.6},
-                            Article{ArticleType::muttern, static_cast<Priority>(intDist(eng)),
+                            Article{static_cast<ArticleType>(storeOrRemove(eng)), static_cast<Priority>(intDist(eng)),
                                     static_cast<unsigned int>(quantityDist(eng))}};
 
 //    Container tempContainer{Size{0.6, 0.6, 0.6},
@@ -177,8 +178,12 @@ void Simulation(StorageManager& storageManager){
 
         // initialize test container
         Container testContainer = GenerateContainer();
-
-        storageManager.AddToQueue(testContainer);
+        if(storeOrRemove(eng)){
+            storageManager.AddToQueue(testContainer);
+        }
+        else{
+            storageManager.RemoveFromStorage(testContainer.article_.type_, testContainer.article_.quantity_);
+        }
     }
 }
 
