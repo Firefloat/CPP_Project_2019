@@ -119,27 +119,29 @@ void StorageManager::AddToQueue(Container &container) {
     auto bestPlace = this->FindOptimalSpace(container);
     Container referenceContainer{};
     if (bestPlace == referenceContainer.coordinates_){
-        std::cout << "\n\n-------------- No free queue available, please try again later--------------\n\n";
-        Loaderton::Instance().LogFile << "\n\n-------------- No free queue available, please try again later--------------\n\n";
+        std::cout << "\n\n-------------- No free queue available! Please wait --------------\n\n";
+        Loaderton::Instance().LogFile << "\n\n-------------- No free queue available! Please wait --------------\n\n";
     }
-    else{
-        auto timeNow = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-        std::cout << "\n\nPackage " << container << " will be stored at: \n" << bestPlace << " ---------------------------  " << std::ctime(&timeNow) << "\n\n";
-        Loaderton::Instance().LogFile << "\n\nPackage " << container << " will be stored at: \n" << bestPlace << " --------------------------- " << std::ctime(&timeNow) << "\n\n";
-
-        container.coordinates_ = bestPlace;
-
-        // find robo corrisponding to x-coord of best place
-        // TODO: robo store multithreading
-
-
-        Robo &robo = this->FindRoboByContainerXCoord(bestPlace.x_);
-
-        if (robo.coordinates_.x_ > container.coordinates_.x_) {
-            robo.leftShelf_.Store(container);
-        } else {
-            robo.rightShelf_.Store(container);
-        }
-        robo.AddToActionQueue(FunctionStore, container);
+    while(bestPlace == referenceContainer.coordinates_){
+        bestPlace = this->FindOptimalSpace(container);
     }
+    auto timeNow = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+    std::cout << "\n\nPackage " << container << " will be stored at: \n" << bestPlace << " ---------------------------  " << std::ctime(&timeNow) << "\n\n";
+    Loaderton::Instance().LogFile << "\n\nPackage " << container << " will be stored at: \n" << bestPlace << " --------------------------- " << std::ctime(&timeNow) << "\n\n";
+
+    container.coordinates_ = bestPlace;
+
+    // find robo corrisponding to x-coord of best place
+    // TODO: robo store multithreading
+
+
+    Robo &robo = this->FindRoboByContainerXCoord(bestPlace.x_);
+
+    if (robo.coordinates_.x_ > container.coordinates_.x_) {
+        robo.leftShelf_.Store(container);
+    } else {
+        robo.rightShelf_.Store(container);
+    }
+    robo.AddToActionQueue(FunctionStore, container);
+
 }

@@ -83,7 +83,7 @@ void Robo::AddToActionQueue(FunctionType functionType, Container container) {
 }
 
 void Robo::CheckActionQueue() {
-    if(actionQueue_.empty() && thread_.joinable()){
+    if(actionQueue_.empty()){
         isAvailable = true;
     } else{
         Do();
@@ -91,21 +91,17 @@ void Robo::CheckActionQueue() {
 }
 
 void Robo::Do() {
-    // TODO: use thread for detach?
     auto action = actionQueue_.front();
-    std::future<bool> doAction;
     switch (action.first) {
         case FunctionStore:
-            doAction = std::async(&Robo::Store, this, action.second);
+            Store(action.second);
             break;
         case FunctionRemove:
-            doAction = std::async(&Robo::Remove, this, action.second);
+            Remove(action.second);
             break;
     }
-    if(doAction.get()){
-        actionQueue_.pop();
-        CheckActionQueue();
-    }
+    actionQueue_.pop();
+    CheckActionQueue();
 }
 
 
