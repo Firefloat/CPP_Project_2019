@@ -72,11 +72,11 @@ double Robo::GetMovingTime(Coordinates targetCoordinates) {
 }
 
 void Robo::AddToActionQueue(FunctionType functionType, Container container) {
-    std::cout << "Here" << std::endl;
+//    std::cout << "Here" << std::endl;
     auto p1 = std::make_pair(functionType, container);
-    std::cout << "Here" << std::endl;
-    //actionQueue_.push(std::make_pair(functionType, container)); // <-- Hier Micha
-    std::cout << thread_.joinable() << std::endl;
+//    std::cout << "Here" << std::endl;
+    actionQueue_.push(std::make_pair(functionType, container)); // <-- Hier Micha
+//    std::cout << thread_.joinable() << std::endl;
     if (!(thread_.joinable())){
         thread_ = std::thread(&Robo::CheckActionQueue, this);
     }
@@ -84,7 +84,7 @@ void Robo::AddToActionQueue(FunctionType functionType, Container container) {
 
 void Robo::CheckActionQueue() {
     if(actionQueue_.empty() && thread_.joinable()){
-        std::terminate();
+        //std::terminate();
     } else{
         Do();
     }
