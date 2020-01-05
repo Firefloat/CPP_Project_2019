@@ -69,7 +69,7 @@ Container Shelf::Remove(Coordinates coordinates) {
     return Container(size_, Article(muttern,high,2));
 }
 
-void Shelf::Store(Container container) {
+void Shelf::Store(Container &container) {
     double epsilon = 0.01f;
     for (auto &board : boards_){
         if (std::fabs(board.coordinates_.y_ - container.coordinates_.y_) < epsilon){

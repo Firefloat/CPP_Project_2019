@@ -12,13 +12,13 @@ std::uniform_int_distribution<> quantityDist{0, 100};
 
 Container GenerateContainer(){
 
-//    Container tempContainer{Size{0.6, 0.6, 0.6},
-//                            Article{ArticleType::muttern, static_cast<Priority>(intDist(eng)),
-//                                    static_cast<unsigned int>(quantityDist(eng))}};
-
     Container tempContainer{Size{0.6, 0.6, 0.6},
-                            Article{ArticleType::muttern, Priority::medium,
+                            Article{ArticleType::muttern, static_cast<Priority>(intDist(eng)),
                                     static_cast<unsigned int>(quantityDist(eng))}};
+
+//    Container tempContainer{Size{0.6, 0.6, 0.6},
+//                            Article{ArticleType::muttern, Priority::medium,
+//                                    static_cast<unsigned int>(quantityDist(eng))}};
     return tempContainer;
 }
 

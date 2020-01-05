@@ -80,7 +80,7 @@ Robo& StorageManager::FindRoboByContainerXCoord(double xCoord) {
     }
 }
 
-void StorageManager::AddToQueue(const Container &container) {
+void StorageManager::AddToQueue(Container &container) {
     // find best place to store container
     auto bestPlace = this->FindOptimalSpace(container);
 

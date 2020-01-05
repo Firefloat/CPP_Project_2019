@@ -22,7 +22,7 @@ public:
     Shelf();
     Shelf(Coordinates coordinates);
 
-    void Store(Container container);
+    void Store(Container &container);
     Container Remove(Coordinates coordinates);
     std::tuple<Coordinates, double> GetFreeSpace(const Container& container);
 };

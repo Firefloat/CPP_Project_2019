@@ -19,7 +19,7 @@ public:
     std::vector<Robo> robots_;
     StorageManager();
     Coordinates FindOptimalSpace(const Container& container);
-    void AddToQueue(const Container &container);
+    void AddToQueue(Container &container);
     void RemoveFromStorage(ArticleType articleType, int amount);
 
     // for debugging only TODO: move to private

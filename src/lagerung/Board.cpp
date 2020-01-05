@@ -56,7 +56,7 @@ std::vector<FreeSpace> Board::GetFreeSpace(const Container& container) {
     return resultVector;
 }
 
-void Board::Store(Container container) {
+void Board::Store(Container &container) {
     std::cout << "Store Container in Board at y = " << coordinates_.y_ << "\n";
     std::lock_guard<std::mutex> lock(protector);
 
