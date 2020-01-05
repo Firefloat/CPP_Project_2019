@@ -5,6 +5,7 @@
 #include "../setup/Loaderton.h"
 #include "Size.h"
 #include "Board.h"
+#include <cfloat>
 #include <cmath>
 
 class Shelf {
