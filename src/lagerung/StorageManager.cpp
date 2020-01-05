@@ -33,24 +33,28 @@ Coordinates StorageManager::FindOptimalSpace(const Container& container) {
     std::tuple<Coordinates, int> resultTuple;
     double smallestDifference{FLT_MAX};
     Coordinates bestCoords{};
+    int weight{1};
 
     for (const auto& robo : robots_){
+        if (robo.isAvailable){
+            weight = 0;
+        }
         // retrieve tuple from left shelf
         resultTuple = getFreeSpaceFromShelfs(robo.leftShelf_);
 
         // check if left shelf has best space, with smallest gap
-        if (std::get<1>(resultTuple) < smallestDifference){
+        if (std::get<1>(resultTuple) + weight < smallestDifference){
             bestCoords = std::get<0>(resultTuple);
-            smallestDifference = std::get<1>(resultTuple);
+            smallestDifference = std::get<1>(resultTuple) + weight;
         }
 
         // retrieve tuple from right shelf
         resultTuple = getFreeSpaceFromShelfs(robo.rightShelf_);
 
         // check if right shelf has best space, with smallest gap
-        if (std::get<1>(resultTuple) < smallestDifference){
+        if (std::get<1>(resultTuple) + weight < smallestDifference){
             bestCoords = std::get<0>(resultTuple);
-            smallestDifference = std::get<1>(resultTuple);
+            smallestDifference = std::get<1>(resultTuple) + weight;
         }
     }
     return bestCoords;
