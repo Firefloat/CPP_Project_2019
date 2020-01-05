@@ -72,6 +72,7 @@ double Robo::GetMovingTime(Coordinates targetCoordinates) {
 }
 
 void Robo::AddToActionQueue(FunctionType functionType, Container container) {
+    isAvailable = false;
 //    std::cout << "Here" << std::endl;
     auto p1 = std::make_pair(functionType, container);
 //    std::cout << "Here" << std::endl;
@@ -84,7 +85,7 @@ void Robo::AddToActionQueue(FunctionType functionType, Container container) {
 
 void Robo::CheckActionQueue() {
     if(actionQueue_.empty() && thread_.joinable()){
-        //std::terminate();
+        isAvailable = true;
     } else{
         Do();
     }

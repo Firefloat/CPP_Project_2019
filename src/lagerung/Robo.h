@@ -21,6 +21,7 @@ class Robo {
 private:
 
 public:
+    volatile bool isAvailable{true};
     float verticalAcceleration_;
     float verticalVelocity_;
     float horizontalAcceleration_;
