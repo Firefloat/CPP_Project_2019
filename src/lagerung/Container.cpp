@@ -8,6 +8,13 @@ float Container::GetPrioPos() const {
     }
 }
 
+std::ostream& operator << (std::ostream& os, const Container& container){
+
+    os << "ID: " << (size_t)&container << "\n";
+
+    return os;
+}
+
 // initialize optimal positions for each priority
 const float Container::prio1Pos = 0;
 const float Container::prio2Pos = static_cast<float>(Loaderton::Instance().getJsonData()["shelf"]["width"])/2;

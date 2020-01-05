@@ -4,6 +4,7 @@
 #include "Size.h"
 #include "Article.h"
 #include "Coordinates.h"
+#include <ostream>
 #include "../setup/Loaderton.h"
 
 class Container {
@@ -19,6 +20,7 @@ public:
     float GetPrioPos() const;
     Container(Size size, Article article) : size_(size), article_(article) {};
     Container() = default;
+    friend std::ostream& operator << (std::ostream& os, const Container& container) ;
 };
 
 
