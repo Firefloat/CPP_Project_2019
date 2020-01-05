@@ -25,7 +25,7 @@ public:
     Board(const Board &other);
 
     std::vector<FreeSpace> GetFreeSpace(const Container& container);
-    void Store(Container container);
+    void Store(Container &container);
     Container Remove(Coordinates coordinates);
 };
 

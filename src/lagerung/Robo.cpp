@@ -143,7 +143,6 @@ bool Robo::Remove(Container container) {
         std::this_thread::sleep_for(std::chrono::duration<double>(timeStoreRestore_/speedMultiplier_));
         std::this_thread::sleep_for(std::chrono::duration<double>(GetMovingTime(outputCoordinates_)/speedMultiplier_));
         std::this_thread::sleep_for(std::chrono::duration<double>(timeStoreRestore_/speedMultiplier_));
-        container.isStored = false;
         return true;
     }
     catch(...){
