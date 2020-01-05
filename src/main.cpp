@@ -125,10 +125,7 @@ void UserInteraction(StorageManager& storageManager){
 
         Container c = Container(choosenSize, article);
 
-        // initialize test container
-        Container testContainer = GenerateContainer();
-
-        storageManager.AddToQueue(testContainer);
+        storageManager.AddToQueue(c );
         isInputLegit = false;
     }
 }
